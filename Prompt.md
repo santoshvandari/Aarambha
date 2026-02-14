@@ -1,181 +1,178 @@
-Create a fully frontend-only website in **Next.js (latest stable)** using **Tailwind CSS**.
+# Next.js + Tailwind CSS Website Prompt (Refined for Aarambha)
 
-The site is for a nonprofit social club named **Aarambha**.  
-It must be **simple, clean, professional**, and **highly configurable**.
+Create a **frontend-only website in Next.js (latest stable)** using **Tailwind CSS**.
+The website is for a **nonprofit social club named Aarambha**.
+The design must be **minimal, clean, professional, and visually balanced**, with a **cohesive color palette**.
 
 ---
 
 ## 🎨 THEME CONFIGURATION
 
-Make all colors and fonts configurable from **one central place**.
+All colors and fonts must be **centralized** and **fully configurable** from one place.
 
-1. In the project root, create:
-   - `theme.config.js`
-   - This file should export a single config object with:
-     • Primary Color
-     • Secondary Color
-     • Accent Color
-     • Background Color
-     • Text Color
-     • Font Families
+1. In the project root, create a file: `theme.config.js`
+   Export a single config object with **colors and fonts**:
 
-Example structure:
-```
-
+```js
 module.exports = {
-colors: {
-primary: "#0F172A",
-secondary: "#0D9488",
-accent: "#D97706",
-background: "#FAFAFA",
-text: "#1F2937",
-},
-fonts: {
-heading: "Montserrat, sans-serif",
-body: "Open Sans, sans-serif",
-},
+  colors: {
+    primary: "#0F172A",     // deep navy
+    secondary: "#0D9488",   // teal
+    accent: "#D97706",      // warm orange
+    background: "#FAFAFA",  // light background
+    text: "#1F2937",        // dark text
+  },
+  fonts: {
+    heading: "Montserrat, sans-serif",
+    body: "Open Sans, sans-serif",
+  },
 };
-
 ```
 
-2. Tailwind must be configured to use these values via `tailwind.config.js` references to `theme.config.js`.
-
-Do not hardcode colors or fonts anywhere else.
+2. **Tailwind** must reference these values via `tailwind.config.js`.
+   **No hardcoded colors or fonts anywhere else.**
 
 ---
 
 ## 🧰 PROJECT REQUIREMENTS
 
-• Use **Next.js**  
-• Use **Tailwind CSS** only  
-• No backend / no database  
-• Static placeholder content inside components
+* **Next.js** (latest stable)
+* **Tailwind CSS only**
+* Fully **frontend / static**
+* Placeholder content for all sections
+* **Responsive design** (mobile, tablet, desktop)
+* **TypeScript** throughout
 
 ---
 
 ## 🧱 COMPONENT & PAGE STRUCTURE
 
 ### Global Layout
-- `Header` with navigation
-- `Footer` with social icons
 
-Navigation:
-Home | About | Programs | Team | Contact
+* **Header / Navbar** with navigation (sticky optional)
+
+  * Links: Home | About | Programs | Team | Contact
+  * Use **icons** for social links in the header/footer, no emojis
+* **Footer** with social icons and contact info
 
 ---
 
 ### Pages
 
-#### 1. **Home**
-- Hero section
-  • Title: “Aarambha”
-  • Tagline: “Where Change Begins”
-  • Primary Call-to-Action button
-- Brief description
-- Featured Programs preview
+#### 1. Home
 
-#### 2. **About**
-- Full club description
-- Mission / vision
+* **Hero section**
 
-#### 3. **Programs**
-- A list/grid of programs
-- Icons, titles, description
+  * Title: “Aarambha”
+  * Tagline: “Where Change Begins”
+  * Primary Call-to-Action button
+* Brief club description
+* **Featured Programs** preview (3-4 cards)
 
-#### 4. **Team**
-- Team member cards
-  • Photo (placeholder)
-  • Name
-  • Title
-  • Short bio
+#### 2. About
 
-#### 5. **Contact**
-- Contact form UI only (no submission logic)
-- Contact details
-  • Email, phone, address
+* Full club description
+* **Mission / Vision** section
+* Optional icon-based highlights for core values
+
+#### 3. Programs
+
+* Grid/list of programs
+* Each program has:
+
+  * Icon
+  * Title
+  * Short description
+
+#### 4. Team
+
+* **Team member cards**
+
+  * Photo (placeholder)
+  * Name & title
+  * Short bio
+
+#### 5. Contact
+
+* **Contact form UI** (no submission logic)
+* Contact details: email, phone, address
+* Optional map placeholder
 
 ---
 
 ## 🧩 COMPONENT GUIDELINES
 
-Create reusable components:
-- Button
-- Card
-- Hero
-- Section Title
-- Navbar
-- Footer
+Create reusable, clean components:
 
-All Tailwind classes must use theme tokens.
+* **Button** – supports primary/secondary styles
+* **Card** – for programs, team, featured content
+* **Hero** – title, tagline, CTA button
+* **SectionTitle** – consistent typography
+* **Navbar** – responsive, sticky optional
+* **Footer** – social icons + contact info
 
-Example:
-```
+**Tailwind classes must use theme tokens only**:
 
+```css
 bg-primary text-background
 hover:bg-accent
 font-heading
-
 ```
 
 ---
 
-## 📐 TYPGRAPHY & FONTS
+## 📐 TYPOGRAPHY
 
-Use Google Fonts:
-• Headings: Montserrat
-• Body: Open Sans
+* Google Fonts:
 
-Load these in the app `_document.js` or via app/head.
-
-Configure Tailwind to use:
-```
-
-font-heading
-font-body
-
-```
-
-defined via `theme.config.js`.
+  * Headings: Montserrat
+  * Body: Open Sans
+* Load fonts in `_document.tsx` or `app/head.tsx`
+* Tailwind classes: `font-heading` and `font-body`
 
 ---
 
-## 🎨 RESPONSIVENESS
+## 🎨 DESIGN & UI REFINEMENTS
 
-Every page must be fully responsive (mobile + tablet + desktop).
-
----
-
-## 🧼 CLEAN CODE GUIDELINES
-
-• Use TypeScript  
-• Well structured folders:
-  /components
-  /layouts
-  /pages (or app/*)
-  /styles
-  theme.config.js
-  tailwind.config.js
-• Add comments where needed
-• No inline Tailwind colors — always reference centralized theme
+* **Minimal and professional NGO aesthetic**
+* **Proper color balance** (primary, secondary, accent)
+* **Clean composition** – aligned sections, adequate whitespace
+* **Icons instead of emojis** for programs, values, contact, social links
+* Consistent card and button styling
+* Subtle hover effects on buttons and links
+* Fully responsive layout
 
 ---
 
-## 📦 FINAL EXPECTATION
+## 🧼 CLEAN CODE & STRUCTURE
 
-Output a **complete Next.js project** with:
+* TypeScript throughout
+* Folder structure:
 
-✔ Tailwind CSS theme configured  
-✔ Central color + font config  
-✔ Clean component-based UI  
-✔ Ready to run:
+```
+/components
+/layouts
+/pages (or /app)
+/styles
+theme.config.js
+tailwind.config.js
 ```
 
+* Well-commented and modular components
+* No inline colors – use centralized theme
+
+---
+
+## 📦 RUNNING THE PROJECT
+
+After cloning / setup:
+
+```bash
 npm install
 npm run dev
-
 ```
 
-Make the UI minimal and professional following NGO website aesthetic.
-```
+* Static content ready to replace with real data
+* Fully responsive, minimal, professional UI
 
 ---
