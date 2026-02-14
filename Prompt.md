@@ -41,7 +41,7 @@ module.exports = {
 * Fully **frontend / static**
 * Placeholder content for all sections
 * **Responsive design** (mobile, tablet, desktop)
-* **TypeScript** throughout
+* **JavaScript** throughout
 
 ---
 
@@ -146,7 +146,7 @@ font-heading
 
 ## 🧼 CLEAN CODE & STRUCTURE
 
-* TypeScript throughout
+* JavaScript throughout
 * Folder structure:
 
 ```
