@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "./Button";
+import {LuMoveRight} from "react-icons/lu";
 
 /**
  * Hero section with background image overlay.
@@ -26,7 +27,7 @@ export default function Hero({
           priority
         />
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/75 to-primary/50" />
+        <div className="absolute inset-0 bg-linear-to-r from-primary/90 via-primary/75 to-primary/50" />
       </div>
 
       {/* Content */}
@@ -57,21 +58,14 @@ export default function Hero({
           <div className="animate-fade-in-up delay-400 mt-10 flex flex-wrap gap-4">
             <Button href={ctaHref} variant="primary" size="lg">
               {ctaText}
-              <svg
-                className="ml-2 h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                />
-              </svg>
+              <LuMoveRight className="ml-3" />
             </Button>
-            <Button href={secondaryCtaHref} variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 hover:text-white">
+            <Button
+              href={secondaryCtaHref}
+              variant="outline"
+              size="lg"
+              className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+            >
               {secondaryCtaText}
             </Button>
           </div>
@@ -79,9 +73,9 @@ export default function Hero({
           {/* Stats bar */}
           <div className="animate-fade-in-up delay-500 mt-16 grid grid-cols-3 gap-8 border-t border-white/10 pt-8">
             {[
-              { value: "500+", label: "Volunteers" },
-              { value: "50+", label: "Programs" },
-              { value: "10K+", label: "Lives Impacted" },
+              {value: "500+", label: "Volunteers"},
+              {value: "50+", label: "Programs"},
+              {value: "10K+", label: "Lives Impacted"},
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="text-2xl sm:text-3xl font-heading font-bold text-white">
@@ -95,7 +89,7 @@ export default function Hero({
       </div>
 
       {/* Decorative bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-background to-transparent" />
     </section>
   );
 }
