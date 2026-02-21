@@ -1,10 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
+import { LuLinkedin, LuTwitter, LuArrowRight } from "react-icons/lu";
+import { motion } from "framer-motion";
 
-export const metadata = {
-  title: "Team — Aarambha",
-  description:
-    "Meet the dedicated team behind Aarambha, working tirelessly to create positive change in communities.",
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1 },
+  }),
 };
 
 /* ── Team Data ──────────────────────────────── */
@@ -43,25 +50,59 @@ export default function TeamPage() {
   return (
     <>
       {/* Page Header */}
-      <section className="bg-primary pt-32 pb-20">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-4">
-            Our Team
-          </h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Meet the passionate individuals driving Aarambha&apos;s mission forward every day.
-          </p>
+      <section className="relative bg-primary pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-secondary/10 blur-[120px]" />
+          <div className="absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-accent/8 blur-[120px]" />
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: "radial-gradient(rgba(255,255,255,.4) 1px, transparent 1px)",
+              backgroundSize: "32px 32px",
+            }}
+          />
         </div>
+        <div className="relative mx-auto max-w-7xl px-6 text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center rounded-full bg-white/[0.07] backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-white/70 border border-white/[0.08] mb-6"
+          >
+            Our People
+          </motion.span>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+            className="text-4xl sm:text-5xl font-heading font-bold text-white mb-5 leading-tight"
+          >
+            Our Team
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-white/50 max-w-2xl mx-auto"
+          >
+            Meet the passionate individuals driving Aarambha&apos;s mission forward every day.
+          </motion.p>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Team Grid */}
-      <section className="py-20 sm:py-28">
+      <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map((member) => (
-              <div
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {teamMembers.map((member, i) => (
+              <motion.div
                 key={member.name}
-                className="group rounded-2xl bg-surface border border-border overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="group rounded-2xl bg-white border border-border/40 shadow-[0_1px_3px_rgba(0,0,0,0.05),0_6px_20px_rgba(0,0,0,0.03)] dark:bg-white/[0.03] dark:border-white/10 dark:shadow-none overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1"
               >
                 {/* Photo */}
                 <div className="relative aspect-square overflow-hidden bg-background">
@@ -81,25 +122,21 @@ export default function TeamPage() {
                       aria-label={`${member.name} LinkedIn`}
                       className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-secondary transition-colors"
                     >
-                      <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                      </svg>
+                      <LuLinkedin className="h-4 w-4" />
                     </a>
                     <a
                       href={member.social.twitter}
                       aria-label={`${member.name} Twitter`}
                       className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-secondary transition-colors"
                     >
-                      <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                      </svg>
+                      <LuTwitter className="h-4 w-4" />
                     </a>
                   </div>
                 </div>
 
                 {/* Info */}
                 <div className="p-6">
-                  <h3 className="font-heading font-semibold text-primary text-lg">
+                  <h3 className="font-heading font-semibold text-text text-lg">
                     {member.name}
                   </h3>
                   <p className="text-sm text-secondary font-medium mb-3">
@@ -109,28 +146,34 @@ export default function TeamPage() {
                     {member.bio}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Join the Team CTA */}
-      <section className="py-20 bg-primary/[0.02]">
+      <section className="py-24 sm:py-32 bg-surface/50 dark:bg-white/[0.015] border-t border-border/30 dark:border-white/5">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <SectionTitle
-            title="Join Our Team"
-            subtitle="We're always looking for passionate individuals who want to make a difference. Become a part of our growing family."
-          />
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-lg bg-secondary px-8 py-4 text-base font-semibold text-white shadow-md transition-all duration-200 hover:bg-secondary/90 hover:shadow-lg hover:-translate-y-0.5"
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            Become a Volunteer
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
+            <SectionTitle
+              label="Volunteer"
+              title="Join Our Team"
+              subtitle="We're always looking for passionate individuals who want to make a difference. Become a part of our growing family."
+            />
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-lg bg-secondary px-8 py-4 text-base font-semibold text-white shadow-sm transition-all duration-200 hover:bg-secondary/90 hover:shadow-md hover:-translate-y-0.5"
+            >
+              Become a Volunteer
+              <LuArrowRight className="h-5 w-5" />
+            </a>
+          </motion.div>
         </div>
       </section>
     </>

@@ -1,30 +1,168 @@
 "use client";
 
-import SectionTitle from "@/components/SectionTitle";
 import Button from "@/components/Button";
+import { LuMail, LuPhone, LuMapPin, LuClock, LuSend } from "react-icons/lu";
+import { CiFacebook, CiInstagram, CiTwitter, CiLinkedin } from "react-icons/ci";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1 },
+  }),
+};
 
 export default function ContactPage() {
   return (
     <>
       {/* Page Header */}
-      <section className="bg-primary pt-32 pb-20">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-4">
-            Contact Us
-          </h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Have a question, want to volunteer, or partner with us? We&apos;d love to hear from you.
-          </p>
+      <section className="relative bg-primary pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-secondary/10 blur-[120px]" />
+          <div className="absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-accent/8 blur-[120px]" />
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: "radial-gradient(rgba(255,255,255,.4) 1px, transparent 1px)",
+              backgroundSize: "32px 32px",
+            }}
+          />
         </div>
+        <div className="relative mx-auto max-w-7xl px-6 text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center rounded-full bg-white/[0.07] backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-white/70 border border-white/[0.08] mb-6"
+          >
+            Get In Touch
+          </motion.span>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+            className="text-4xl sm:text-5xl font-heading font-bold text-white mb-5 leading-tight"
+          >
+            Contact Us
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-white/50 max-w-2xl mx-auto"
+          >
+            Have a question, want to volunteer, or partner with us? We&apos;d love to hear from you.
+          </motion.p>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
-      {/* Contact Content */}
-      <section className="py-20 sm:py-28">
+      {/* Contact Content — Split Layout */}
+      <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-12 lg:grid-cols-5">
-            {/* Contact Form */}
-            <div className="lg:col-span-3">
-              <h2 className="text-2xl font-heading font-bold text-primary mb-2">
+            {/* Contact Info Sidebar (Left) */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="lg:col-span-2 order-2 lg:order-1"
+            >
+              <div className="rounded-2xl bg-primary dark:bg-white/[0.03] dark:border dark:border-white/10 p-8 sm:p-10 text-white dark:text-text sticky top-28 overflow-hidden">
+                <h3 className="text-xl font-heading font-bold mb-8 text-white dark:text-text">
+                  Get in Touch
+                </h3>
+
+                <div className="space-y-6">
+                  {/* Email */}
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10 dark:bg-secondary/10">
+                      <LuMail className="h-5 w-5 text-secondary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-white/50 dark:text-muted mb-1">Email</p>
+                      <p className="text-sm font-medium">info@aarambha.org</p>
+                    </div>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10 dark:bg-secondary/10">
+                      <LuPhone className="h-5 w-5 text-secondary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-white/50 dark:text-muted mb-1">Phone</p>
+                      <p className="text-sm font-medium">+977 1-XXXXXXX</p>
+                    </div>
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10 dark:bg-secondary/10">
+                      <LuMapPin className="h-5 w-5 text-secondary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-white/50 dark:text-muted mb-1">Address</p>
+                      <p className="text-sm font-medium">
+                        Kathmandu, Nepal
+                        <br />
+                        Bagmati Province
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Office Hours */}
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10 dark:bg-secondary/10">
+                      <LuClock className="h-5 w-5 text-secondary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-white/50 dark:text-muted mb-1">Office Hours</p>
+                      <p className="text-sm font-medium">
+                        Sun – Fri: 10:00 AM – 5:00 PM
+                        <br />
+                        Sat: Closed
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Social links */}
+                <div className="mt-8 pt-6 border-t border-white/10 dark:border-border">
+                  <p className="text-sm text-white/50 dark:text-muted mb-4">Follow us</p>
+                  <div className="flex gap-3">
+                    {[
+                      { label: "Facebook", icon: <CiFacebook className="h-5 w-5" /> },
+                      { label: "Instagram", icon: <CiInstagram className="h-5 w-5" /> },
+                      { label: "Twitter", icon: <CiTwitter className="h-5 w-5" /> },
+                      { label: "LinkedIn", icon: <CiLinkedin className="h-5 w-5" /> },
+                    ].map((social) => (
+                      <a
+                        key={social.label}
+                        href="#"
+                        aria-label={social.label}
+                        className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 dark:bg-secondary/10 text-white/70 dark:text-muted transition-all duration-200 hover:bg-secondary hover:text-white"
+                      >
+                        {social.icon}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Contact Form (Right) */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="lg:col-span-3 order-1 lg:order-2"
+            >
+              <h2 className="text-2xl font-heading font-bold text-text mb-2">
                 Send us a Message
               </h2>
               <p className="text-muted mb-8">
@@ -37,49 +175,49 @@ export default function ContactPage() {
                 id="contact-form"
               >
                 <div className="grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <label
-                      htmlFor="firstName"
-                      className="block text-sm font-medium text-text mb-2"
-                    >
-                      First Name
-                    </label>
+                  <div className="relative">
                     <input
                       id="firstName"
                       type="text"
-                      placeholder="Your first name"
-                      className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                      placeholder=" "
+                      className="peer w-full rounded-lg border border-border dark:border-white/10 bg-surface dark:bg-white/[0.04] px-4 pt-6 pb-2 text-sm text-text placeholder-transparent transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
                     />
-                  </div>
-                  <div>
                     <label
-                      htmlFor="lastName"
-                      className="block text-sm font-medium text-text mb-2"
+                      htmlFor="firstName"
+                      className="absolute left-4 top-2 text-xs text-muted transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-secondary"
                     >
-                      Last Name
+                      First Name
                     </label>
+                  </div>
+                  <div className="relative">
                     <input
                       id="lastName"
                       type="text"
-                      placeholder="Your last name"
-                      className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                      placeholder=" "
+                      className="peer w-full rounded-lg border border-border dark:border-white/10 bg-surface dark:bg-white/[0.04] px-4 pt-6 pb-2 text-sm text-text placeholder-transparent transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
                     />
+                    <label
+                      htmlFor="lastName"
+                      className="absolute left-4 top-2 text-xs text-muted transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-secondary"
+                    >
+                      Last Name
+                    </label>
                   </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-text mb-2"
-                  >
-                    Email Address
-                  </label>
+                <div className="relative">
                   <input
                     id="email"
                     type="email"
-                    placeholder="you@example.com"
-                    className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                    placeholder=" "
+                    className="peer w-full rounded-lg border border-border dark:border-white/10 bg-surface dark:bg-white/[0.04] px-4 pt-6 pb-2 text-sm text-text placeholder-transparent transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
                   />
+                  <label
+                    htmlFor="email"
+                    className="absolute left-4 top-2 text-xs text-muted transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-secondary"
+                  >
+                    Email Address
+                  </label>
                 </div>
 
                 <div>
@@ -91,7 +229,7 @@ export default function ContactPage() {
                   </label>
                   <select
                     id="subject"
-                    className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                    className="w-full rounded-lg border border-border dark:border-white/10 bg-surface dark:bg-white/[0.04] px-4 py-3 text-sm text-text transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
                   >
                     <option value="">Select a subject</option>
                     <option value="volunteer">Volunteer Inquiry</option>
@@ -102,140 +240,35 @@ export default function ContactPage() {
                   </select>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-text mb-2"
-                  >
-                    Message
-                  </label>
+                <div className="relative">
                   <textarea
                     id="message"
                     rows={5}
-                    placeholder="Tell us how we can help..."
-                    className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 resize-none"
+                    placeholder=" "
+                    className="peer w-full rounded-lg border border-border dark:border-white/10 bg-surface dark:bg-white/[0.04] px-4 pt-6 pb-2 text-sm text-text placeholder-transparent transition-colors focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 resize-none"
                   />
+                  <label
+                    htmlFor="message"
+                    className="absolute left-4 top-2 text-xs text-muted transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-secondary"
+                  >
+                    Your Message
+                  </label>
                 </div>
 
                 <Button type="submit" variant="primary" size="lg">
                   Send Message
-                  <svg
-                    className="ml-2 h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                    />
-                  </svg>
+                  <LuSend className="ml-2 h-5 w-5" />
                 </Button>
               </form>
-            </div>
-
-            {/* Contact Info Sidebar */}
-            <div className="lg:col-span-2">
-              <div className="rounded-2xl bg-primary p-8 sm:p-10 text-white sticky top-28">
-                <h3 className="text-xl font-heading font-bold mb-6">
-                  Get in Touch
-                </h3>
-
-                <div className="space-y-6">
-                  {/* Email */}
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                      <svg className="h-5 w-5 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/50 mb-1">Email</p>
-                      <p className="text-sm font-medium">info@aarambha.org</p>
-                    </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                      <svg className="h-5 w-5 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/50 mb-1">Phone</p>
-                      <p className="text-sm font-medium">+977 1-XXXXXXX</p>
-                    </div>
-                  </div>
-
-                  {/* Address */}
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                      <svg className="h-5 w-5 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/50 mb-1">Address</p>
-                      <p className="text-sm font-medium">
-                        Kathmandu, Nepal
-                        <br />
-                        Bagmati Province
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Office Hours */}
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                      <svg className="h-5 w-5 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/50 mb-1">Office Hours</p>
-                      <p className="text-sm font-medium">
-                        Sun – Fri: 10:00 AM – 5:00 PM
-                        <br />
-                        Sat: Closed
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Social links */}
-                <div className="mt-8 pt-6 border-t border-white/10">
-                  <p className="text-sm text-white/50 mb-4">Follow us</p>
-                  <div className="flex gap-3">
-                    {["Facebook", "Instagram", "Twitter", "LinkedIn"].map(
-                      (social) => (
-                        <a
-                          key={social}
-                          href="#"
-                          aria-label={social}
-                          className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/70 transition-all duration-200 hover:bg-secondary hover:text-white"
-                        >
-                          <span className="text-xs font-bold">
-                            {social[0]}
-                          </span>
-                        </a>
-                      )
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Map Placeholder */}
-      <section className="pb-20 sm:pb-28">
+      <section className="pb-24 sm:pb-32">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="rounded-2xl border border-border bg-surface overflow-hidden">
+          <div className="rounded-2xl border border-border/40 dark:border-white/10 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] dark:bg-white/[0.03] dark:shadow-none overflow-hidden">
             <div className="relative h-72 sm:h-96 bg-background flex items-center justify-center">
               {/* Decorative grid pattern */}
               <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -245,12 +278,9 @@ export default function ContactPage() {
               {/* Center content */}
               <div className="relative z-10 text-center">
                 <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
-                  <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m0 0l3-3m-3 3l-3-3m12.75-1.5a3 3 0 11-6 0 3 3 0 016 0zM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+                  <LuMapPin className="h-8 w-8" />
                 </div>
-                <h3 className="text-lg font-heading font-semibold text-primary mb-1">
+                <h3 className="text-lg font-heading font-semibold text-text mb-1">
                   Kathmandu, Nepal
                 </h3>
                 <p className="text-sm text-muted">

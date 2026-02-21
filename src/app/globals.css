@@ -2,18 +2,26 @@
 
 /* ───────────────────────────────────────────────
    CSS variables sourced from theme.config.js
-   (values are kept in sync manually – edit theme.config.js
-    and mirror changes here)
+   Light mode (default)
    ─────────────────────────────────────────────── */
 :root {
   --color-primary: #0F172A;
   --color-secondary: #0D9488;
-  --color-accent: #D97706;
-  --color-background: #FAFAFA;
-  --color-text: #1F2937;
-  --color-muted: #6B7280;
-  --color-surface: #FFFFFF;
-  --color-border: #E5E7EB;
+  --color-accent: #F59E0B;
+  --color-background: #FAFBFC;
+  --color-text: #0F172A;
+  --color-muted: #64748B;
+  --color-surface: #F1F5F9;
+  --color-border: #E2E8F0;
+}
+
+/* ── Dark mode overrides ────────────────────── */
+.dark {
+  --color-background: #020617;
+  --color-surface: #0F172A;
+  --color-text: #F8FAFC;
+  --color-muted: #94A3B8;
+  --color-border: #1E293B;
 }
 
 /* ───────────────────────────────────────────────
@@ -29,8 +37,8 @@
   --color-surface: var(--color-surface);
   --color-border: var(--color-border);
 
-  --font-heading: "Montserrat", sans-serif;
-  --font-body: "Open Sans", sans-serif;
+  --font-heading: var(--font-montserrat), "Montserrat", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
 }
 
 /* ───────────────────────────────────────────────
@@ -38,59 +46,75 @@
    ─────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-body);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selection */
+::selection {
+  background-color: #0D9488;
+  color: #FFFFFF;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #94A3B8;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748B;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
 }
 
 /* ───────────────────────────────────────────────
-   Utility animations
+   Premium utility classes
+   ─────────────────────────────────────────────── */
+
+/* Gradient text — used sparingly for headings */
+.text-gradient {
+  background: linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ───────────────────────────────────────────────
+   Animations
    ─────────────────────────────────────────────── */
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(32px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.7s ease-out both;
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out both;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.7s ease-out both;
-}
+.animate-fade-in-up { animation: fade-in-up 0.7s ease-out both; }
+.animate-fade-in { animation: fade-in 0.6s ease-out both; }
+.animate-slide-in-right { animation: slide-in-right 0.7s ease-out both; }
 
 /* Staggered animation delays */
 .delay-100 { animation-delay: 0.1s; }

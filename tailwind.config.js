@@ -16,6 +16,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -23,10 +24,10 @@ module.exports = {
         secondary: theme.colors.secondary,
         accent: theme.colors.accent,
         background: theme.colors.background,
+        surface: theme.colors.surface,
         text: theme.colors.text,
-        muted: theme.colors.muted || "#6B7280",
-        surface: theme.colors.surface || "#FFFFFF",
-        border: theme.colors.border || "#E5E7EB",
+        muted: theme.colors.muted,
+        border: theme.colors.border,
       },
       fontFamily: {
         heading: [theme.fonts.heading],

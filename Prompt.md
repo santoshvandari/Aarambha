@@ -1,178 +1,63 @@
-# Next.js + Tailwind CSS Website Prompt (Refined for Aarambha)
+# THE REFINED "AARAMBHA" GENERATION PROMPT
 
-Create a **frontend-only website in Next.js (latest stable)** using **Tailwind CSS**.
-The website is for a **nonprofit social club named Aarambha**.
-The design must be **minimal, clean, professional, and visually balanced**, with a **cohesive color palette**.
+**Role:** You are a Senior Frontend Engineer and UI/UX Designer specializing in Next.js 14+ and design systems.
 
----
+**Task:** Build a high-performance, aesthetically "Elite" website for **Aarambha**, a nonprofit social club. The UI must feel like a modern SaaS or a high-end creative agency—clean, spacious, and impactful.
 
-## 🎨 THEME CONFIGURATION
+## 🛠 TECH STACK & ARCHITECTURE
 
-All colors and fonts must be **centralized** and **fully configurable** from one place.
+* **Framework:** Next.js (App Router, JavaScript).
+* **Styling:** Tailwind CSS + `next-themes` for Dark/Light mode.
+* **Icons:** `react-icons` (Lucide/Phosphor sets).
+* **Animations:** Framer Motion (Subtle scroll-reveal and hover effects).
+* **Theming:** Centralized `theme.config.js` integrated into `tailwind.config.js`.
 
-1. In the project root, create a file: `theme.config.js`
-   Export a single config object with **colors and fonts**:
+## 🎨 DESIGN SYSTEM (Theme Config)
 
-```js
-module.exports = {
-  colors: {
-    primary: "#0F172A",     // deep navy
-    secondary: "#0D9488",   // teal
-    accent: "#D97706",      // warm orange
-    background: "#FAFAFA",  // light background
-    text: "#1F2937",        // dark text
-  },
-  fonts: {
-    heading: "Montserrat, sans-serif",
-    body: "Open Sans, sans-serif",
-  },
-};
-```
+Create `theme.config.js` in the root. Use these tokens strictly:
 
-2. **Tailwind** must reference these values via `tailwind.config.js`.
-   **No hardcoded colors or fonts anywhere else.**
+* **Primary:** `#0F172A` (Navy) | **Secondary:** `#0D9488` (Teal) | **Accent:** `#F59E0B` (Amber).
+* **Dark Mode:** Background `#020617`, Surface `#0F172A`, Text `#F8FAFC`.
+* **Light Mode:** Background `#FFFFFF`, Surface `#F1F5F9`, Text `#0F172A`.
+* **Typography:** Montserrat (Headings), Inter (Body).
 
----
+## 💎 UI/UX REQUIREMENTS
 
-## 🧰 PROJECT REQUIREMENTS
+1. **Dark/Light Toggle:** A polished sun/moon switch in the Navbar.
+2. **No Emojis:** Use `react-icons` exclusively for programs, social media, and UI cues.
+3. **Modern Components:**
+* **Navbar:** Floating Glassmorphism effect (`backdrop-blur-md`) with active-link indicators.
+* **Hero:** Split-layout or centered with a "Glow" gradient background. Use a "Magnetic" CTA button.
+* **Programs:** Use a **Bento Grid** layout for featured initiatives.
+* **Team:** Circular or soft-rect avatars with social hover-overlays.
+* **Buttons:** Define a "Brand" style—solid primary, outlined secondary, and a "ghost" style for less emphasis. **No mismatched colors.**
 
-* **Next.js** (latest stable)
-* **Tailwind CSS only**
-* Fully **frontend / static**
-* Placeholder content for all sections
-* **Responsive design** (mobile, tablet, desktop)
-* **JavaScript** throughout
 
----
 
-## 🧱 COMPONENT & PAGE STRUCTURE
+## 🧱 PAGE STRUCTURE
 
-### Global Layout
+* **Home:** Hero -> Stats Counter (e.g., "50+ Events") -> Featured Programs (Bento) -> Mission Statement.
+* **About:** 2-column "Story" layout with an "Our Values" icon grid.
+* **Programs:** A filterable-style grid (UI only) with hover-scaling cards.
+* **Team:** Professional cards with specific roles and "LinkedIn/Twitter" icons.
+* **Contact:** Split layout. Left: Contact details with icons. Right: A modern form with floating labels and focus-ring effects.
 
-* **Header / Navbar** with navigation (sticky optional)
+## 🧼 CODE QUALITY & REUSABILITY
 
-  * Links: Home | About | Programs | Team | Contact
-  * Use **icons** for social links in the header/footer, no emojis
-* **Footer** with social icons and contact info
+1. **Tailwind Integration:** Extend `tailwind.config.js` to map `theme.config.js` colors to utility classes like `bg-brand-primary`, `text-brand-accent`.
+2. **Component Folder:**
+* `Button.jsx` (Variant-based: primary, secondary, outline).
+* `Section.jsx` (Standard padding/container wrapper).
+* `Card.jsx` (Glass effect in dark mode, soft shadow in light mode).
+* `ThemeToggle.jsx` (Using `next-themes`).
 
----
 
-### Pages
 
-#### 1. Home
+## 🚀 EXECUTION INSTRUCTIONS
 
-* **Hero section**
-
-  * Title: “Aarambha”
-  * Tagline: “Where Change Begins”
-  * Primary Call-to-Action button
-* Brief club description
-* **Featured Programs** preview (3-4 cards)
-
-#### 2. About
-
-* Full club description
-* **Mission / Vision** section
-* Optional icon-based highlights for core values
-
-#### 3. Programs
-
-* Grid/list of programs
-* Each program has:
-
-  * Icon
-  * Title
-  * Short description
-
-#### 4. Team
-
-* **Team member cards**
-
-  * Photo (placeholder)
-  * Name & title
-  * Short bio
-
-#### 5. Contact
-
-* **Contact form UI** (no submission logic)
-* Contact details: email, phone, address
-* Optional map placeholder
-
----
-
-## 🧩 COMPONENT GUIDELINES
-
-Create reusable, clean components:
-
-* **Button** – supports primary/secondary styles
-* **Card** – for programs, team, featured content
-* **Hero** – title, tagline, CTA button
-* **SectionTitle** – consistent typography
-* **Navbar** – responsive, sticky optional
-* **Footer** – social icons + contact info
-
-**Tailwind classes must use theme tokens only**:
-
-```css
-bg-primary text-background
-hover:bg-accent
-font-heading
-```
-
----
-
-## 📐 TYPOGRAPHY
-
-* Google Fonts:
-
-  * Headings: Montserrat
-  * Body: Open Sans
-* Load fonts in `_document.tsx` or `app/head.tsx`
-* Tailwind classes: `font-heading` and `font-body`
-
----
-
-## 🎨 DESIGN & UI REFINEMENTS
-
-* **Minimal and professional NGO aesthetic**
-* **Proper color balance** (primary, secondary, accent)
-* **Clean composition** – aligned sections, adequate whitespace
-* **Icons instead of emojis** for programs, values, contact, social links
-* Consistent card and button styling
-* Subtle hover effects on buttons and links
-* Fully responsive layout
-
----
-
-## 🧼 CLEAN CODE & STRUCTURE
-
-* JavaScript throughout
-* Folder structure:
-
-```
-/components
-/layouts
-/pages (or /app)
-/styles
-theme.config.js
-tailwind.config.js
-```
-
-* Well-commented and modular components
-* No inline colors – use centralized theme
-
----
-
-## 📦 RUNNING THE PROJECT
-
-After cloning / setup:
-
-```bash
-npm install
-npm run dev
-```
-
-* Static content ready to replace with real data
-* Fully responsive, minimal, professional UI
+1. Initialize the project structure.
+2. Configure Tailwind to use the custom theme tokens.
+3. Implement the Global Layout with the Dark Mode provider.
+4. Build the components and assemble the 5 pages with placeholder content that feels premium and authentic to a Social Club.
 
 ---

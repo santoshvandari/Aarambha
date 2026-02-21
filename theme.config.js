@@ -11,15 +11,24 @@ module.exports = {
   colors: {
     primary: "#0F172A",     // Deep navy – trust & professionalism
     secondary: "#0D9488",   // Teal – growth & compassion
-    accent: "#D97706",      // Amber – warmth & call-to-action
-    background: "#FAFAFA",  // Off-white – clean canvas
-    text: "#1F2937",        // Charcoal – comfortable reading
-    muted: "#6B7280",       // Gray – supporting text
-    surface: "#FFFFFF",     // White – cards & elevated surfaces
-    border: "#E5E7EB",      // Light gray – subtle borders
+    accent: "#F59E0B",      // Amber – warmth & call-to-action
+
+    /* ── Light mode ─────────────────────────── */
+    background: "#FFFFFF",
+    surface: "#F1F5F9",
+    text: "#0F172A",
+    muted: "#6B7280",
+    border: "#E5E7EB",
+
+    /* ── Dark mode ──────────────────────────── */
+    "dark-background": "#020617",
+    "dark-surface": "#0F172A",
+    "dark-text": "#F8FAFC",
+    "dark-muted": "#94A3B8",
+    "dark-border": "#1E293B",
   },
   fonts: {
     heading: "Montserrat, sans-serif",
-    body: "Open Sans, sans-serif",
+    body: "Inter, sans-serif",
   },
 };
