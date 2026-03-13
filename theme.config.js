@@ -9,16 +9,20 @@
 
 module.exports = {
   colors: {
-    primary: "#0F172A",     // Deep navy – trust & professionalism
-    secondary: "#0D9488",   // Teal – growth & compassion
-    accent: "#F59E0B",      // Amber – warmth & call-to-action
+    primary: "#0F172A",     // deep navy
+    secondary: "#0D9488",   // teal
+    accent: "#D97706",      // warm orange
 
-    /* ── Light mode ─────────────────────────── */
-    background: "#FFFFFF",
-    surface: "#F1F5F9",
-    text: "#0F172A",
-    muted: "#6B7280",
-    border: "#E5E7EB",
+    background: "#F8FAFC",  // soft neutral background
+    surface: "#FFFFFF",     // card/section background
+    muted: "#F1F5F9",       // alternate section background
+
+    text: "#1E293B",
+    textLight: "#64748B",
+
+    border: "#E2E8F0",
+
+    heroDark: "#0B1324",
 
     /* ── Dark mode ──────────────────────────── */
     "dark-background": "#020617",
@@ -29,6 +33,6 @@ module.exports = {
   },
   fonts: {
     heading: "Montserrat, sans-serif",
-    body: "Inter, sans-serif",
+    body: "Open Sans, sans-serif",
   },
 };

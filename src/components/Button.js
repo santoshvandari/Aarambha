@@ -23,7 +23,7 @@ const Button = forwardRef(function Button(
     outline:
       "border border-secondary/30 text-secondary hover:bg-secondary hover:text-white hover:border-secondary focus:ring-secondary",
     ghost:
-      "text-muted hover:bg-surface hover:text-text focus:ring-secondary shadow-none hover:shadow-none",
+      "text-textLight hover:bg-surface hover:text-text focus:ring-secondary shadow-none hover:shadow-none",
   };
 
   const sizes = {

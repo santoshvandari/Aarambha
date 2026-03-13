@@ -26,13 +26,13 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 bg-background/90 backdrop-blur-xl border-b ${
+      className={`sticky top-0 z-50 transition-all duration-300 bg-background/95 border-b ${
         scrolled
           ? "border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.06)] dark:border-white/5 dark:shadow-none"
-          : "border-border/30 dark:border-white/[0.03]"
+          : "border-border/30 dark:border-white/3"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Logo with accent mark */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-white font-heading font-bold text-lg shadow-sm transition-transform duration-200 group-hover:scale-105">
@@ -53,8 +53,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-secondary bg-secondary/[0.08]"
-                      : "text-muted hover:text-text hover:bg-surface/80 dark:hover:bg-white/5"
+                      ? "text-secondary bg-secondary/8"
+                      : "text-textLight hover:text-text hover:bg-surface/80 dark:hover:bg-white/5"
                   }`}
                 >
                   {link.label}
@@ -106,8 +106,8 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t bg-background/95 backdrop-blur-xl ${
-          mobileOpen ? "max-h-[28rem] pb-6 border-border/50" : "max-h-0 border-transparent"
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t bg-background/95 ${
+          mobileOpen ? "max-h-112 pb-6 border-border/50" : "max-h-0 border-transparent"
         }`}
       >
         <ul className="flex flex-col gap-1 px-6 pt-4">
@@ -121,7 +121,7 @@ export default function Navbar() {
                   className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                     isActive
                       ? "bg-secondary/10 text-secondary"
-                      : "text-muted hover:bg-surface hover:text-text"
+                      : "text-textLight hover:bg-surface hover:text-text"
                   }`}
                 >
                   {link.label}

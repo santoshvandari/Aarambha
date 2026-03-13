@@ -1,10 +1,12 @@
 "use client";
 
 import {useRef} from "react";
+import {useEffect, useState} from "react";
 import Button from "./Button";
 import {LuMoveRight, LuSparkles} from "react-icons/lu";
 import {motion} from "framer-motion";
 import Image from "next/image";
+import {useTheme} from "next-themes";
 
 export default function Hero({
   title = "Aarambha",
@@ -16,6 +18,16 @@ export default function Hero({
   secondaryCtaHref = "/about",
   backgroundImage = "/hero-bg.png",
 }) {
+  const {theme} = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration guard for theme-aware rendering
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && theme === "dark";
+
   const btnRef = useRef(null);
 
   const handleMouseMove = (e) => {
@@ -46,46 +58,44 @@ export default function Hero({
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-primary">
-      <div className="absolute inset-0">
-        <Image
-          src={backgroundImage}
-          alt="Aarambha community volunteers"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-linear-to-r from-primary/90 via-primary/75 to-primary/50" />
-      </div>
-      {/* Subtle ambient glow — only two, no gimmicks */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 h-[600px] w-[600px] rounded-full bg-secondary/12 blur-[150px]" />
-        <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-accent/8 blur-[150px]" />
-      </div>
-
-      {/* Dot grid overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-background dark:bg-heroDark text-text dark:text-white py-28 border-b border-border dark:border-white/10">
+      {isDark ? (
+        <div className="absolute inset-0">
+          <Image
+            src={backgroundImage}
+            alt="Aarambha community volunteers"
+            fill
+            className="object-cover opacity-100"
+            priority
+          />
+          <div className="absolute inset-0 bg-heroDark/70" />
+          <div
+            className="absolute inset-0 opacity-[0.035] pointer-events-none"
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
+        </div>
+      ) : (
+        <div className="absolute inset-0 bg-background">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(13,148,136,0.12),transparent_55%)]" />
+        </div>
+      )}
 
       {/* Content */}
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 mx-auto max-w-7xl w-full px-6 py-20 sm:py-28"
+        className="relative z-10 mx-auto max-w-6xl w-full px-6"
       >
-        <div className="max-w-2xl">
+        <div className="mx-auto max-w-3xl text-center">
           {/* Badge */}
           <motion.div
             variants={item}
-            className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/[0.08] px-4 py-2 text-sm font-medium text-white/70 border border-white/[0.08]"
+            className="mb-6 inline-flex items-center gap-2 rounded-full bg-surface dark:bg-white/12 px-4 py-2 text-sm font-medium text-text dark:text-white/90 border border-border dark:border-white/25"
           >
             <LuSparkles className="h-3.5 w-3.5 text-accent" />
             Nonprofit Social Club
@@ -94,7 +104,7 @@ export default function Hero({
           {/* Title */}
           <motion.h1
             variants={item}
-            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-text dark:text-white leading-[1.1] tracking-tight"
           >
             {title}
           </motion.h1>
@@ -110,7 +120,7 @@ export default function Hero({
           {/* Description */}
           <motion.p
             variants={item}
-            className="mt-6 text-base sm:text-lg text-white/55 leading-relaxed max-w-lg"
+            className="mt-6 text-base sm:text-lg text-textLight dark:text-white/85 leading-relaxed max-w-2xl mx-auto"
           >
             {description}
           </motion.p>
@@ -118,7 +128,7 @@ export default function Hero({
           {/* CTAs */}
           <motion.div
             variants={item}
-            className="mt-8 flex flex-wrap items-center gap-4"
+            className="mt-8 flex flex-wrap items-center justify-center gap-4"
           >
             <div
               onMouseMove={handleMouseMove}
@@ -140,7 +150,7 @@ export default function Hero({
               href={secondaryCtaHref}
               variant="ghost"
               size="lg"
-              className="border border-white/15 text-white hover:bg-white/[0.06] hover:border-white/25"
+              className="border border-border text-text hover:bg-muted hover:border-border dark:border-white/25 dark:text-white dark:hover:bg-white/10 dark:hover:border-white/35"
             >
               {secondaryCtaText}
             </Button>
@@ -149,7 +159,7 @@ export default function Hero({
           {/* Stats */}
           <motion.div
             variants={item}
-            className="mt-16 flex items-center gap-8 sm:gap-12"
+            className="mt-16 flex items-center justify-center gap-8 sm:gap-12"
           >
             {[
               {value: "500+", label: "Volunteers"},
@@ -161,13 +171,13 @@ export default function Hero({
                 className="flex items-center gap-8 sm:gap-12"
               >
                 {i > 0 && (
-                  <div className="h-8 w-px bg-white/10 -ml-4 sm:-ml-6" />
+                  <div className="h-8 w-px bg-border dark:bg-white/25 -ml-4 sm:-ml-6" />
                 )}
                 <div>
-                  <p className="text-2xl sm:text-3xl font-heading font-bold text-white tracking-tight">
+                  <p className="text-2xl sm:text-3xl font-heading font-bold text-text dark:text-white tracking-tight">
                     {stat.value}
                   </p>
-                  <p className="mt-1 text-xs text-white/35 uppercase tracking-wider">
+                  <p className="mt-1 text-xs text-textLight dark:text-white/85 uppercase tracking-wider">
                     {stat.label}
                   </p>
                 </div>
@@ -177,8 +187,6 @@ export default function Hero({
         </div>
       </motion.div>
 
-      {/* Bottom fade — short, clean transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 }

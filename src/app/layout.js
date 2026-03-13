@@ -1,8 +1,9 @@
-import { Montserrat, Inter } from "next/font/google";
+import { Montserrat, Open_Sans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MainLayout from "@/layouts/MainLayout";
 
 /* ── Google Fonts ─────────────────────────────── */
 const montserrat = Montserrat({
@@ -12,8 +13,8 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -29,11 +30,11 @@ export const metadata = {
 /* ── Root Layout ──────────────────────────────── */
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${montserrat.variable} ${openSans.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased bg-background text-text">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <Navbar />
-          <main className="min-h-screen">{children}</main>
+          <MainLayout>{children}</MainLayout>
           <Footer />
         </ThemeProvider>
       </body>
