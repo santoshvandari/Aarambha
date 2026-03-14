@@ -250,29 +250,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-surface dark:bg-primary text-text dark:text-white py-20 md:py-28">
+      <section className="bg-surface text-text py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="rounded-3xl border border-border dark:border-white/15 px-8 py-16 sm:px-12 text-center"
+            className="rounded-3xl border border-border px-8 py-16 sm:px-12 text-center"
           >
             <motion.span
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full bg-muted dark:bg-white/10 px-4 py-1.5 text-sm text-textLight dark:text-white/80 border border-border dark:border-white/10 mb-6"
+              className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 text-sm text-textLight border border-border mb-6"
             >
               <LuSparkles className="h-3.5 w-3.5 text-accent" />
               Be Part of the Change
             </motion.span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-text dark:text-white mb-5 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-text mb-5 leading-tight">
               Ready to Make a Difference?
             </h2>
-            <p className="text-lg text-textLight dark:text-white/80 max-w-xl mx-auto mb-10">
+            <p className="text-lg text-textLight max-w-xl mx-auto mb-10">
               Join Aarambha and become part of a community that believes in the power of collective action.
               Together, we can create lasting change.
             </p>
@@ -285,7 +285,7 @@ export default function HomePage() {
                 href="/team"
                 variant="ghost"
                 size="lg"
-                className="border border-border text-text hover:bg-muted hover:border-border dark:border-white/20 dark:text-white dark:hover:bg-white/10 dark:hover:border-white/30"
+                className="border border-border text-text hover:bg-muted hover:border-border"
               >
                 Meet Our Team
               </Button>

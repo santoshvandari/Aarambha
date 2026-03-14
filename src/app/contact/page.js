@@ -17,12 +17,12 @@ const fadeUp = {
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-muted dark:bg-heroDark text-text dark:text-white pt-28 pb-20">
+      <section className="bg-muted text-text pt-28 pb-20">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center rounded-full bg-surface dark:bg-white/10 px-4 py-1.5 text-sm font-medium text-textLight dark:text-white/80 border border-border dark:border-white/15 mb-6"
+            className="inline-flex items-center rounded-full bg-surface px-4 py-1.5 text-sm font-medium text-textLight border border-border mb-6"
           >
             Get In Touch
           </motion.span>
@@ -30,7 +30,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="text-4xl sm:text-5xl font-heading font-bold text-text dark:text-white mb-5 leading-tight"
+            className="text-4xl sm:text-5xl font-heading font-bold text-text mb-5 leading-tight"
           >
             Contact Us
           </motion.h1>
@@ -38,7 +38,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-textLight dark:text-white/80 max-w-2xl mx-auto"
+            className="text-lg text-textLight max-w-2xl mx-auto"
           >
             Have a question, want to volunteer, or partner with us? We&apos;d love to hear from you.
           </motion.p>
@@ -55,36 +55,36 @@ export default function ContactPage() {
               viewport={{ once: true }}
               className="lg:col-span-2 order-2 lg:order-1"
             >
-              <div className="rounded-xl bg-surface dark:bg-primary border border-border dark:border-white/10 p-8 sm:p-10 text-text dark:text-white sticky top-28">
-                <h3 className="text-xl font-heading font-bold mb-8 text-text dark:text-white">Get in Touch</h3>
+              <div className="rounded-xl bg-surface border border-border p-8 sm:p-10 text-text sticky top-28">
+                <h3 className="text-xl font-heading font-bold mb-8 text-text">Get in Touch</h3>
 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted dark:bg-white/10">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted">
                       <LuMail className="h-5 w-5 text-secondary" />
                     </div>
                     <div>
-                      <p className="text-sm text-textLight dark:text-white/80 mb-1">Email</p>
+                      <p className="text-sm text-textLight mb-1">Email</p>
                       <p className="text-sm font-medium">info@aarambha.org</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted dark:bg-white/10">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted">
                       <LuPhone className="h-5 w-5 text-secondary" />
                     </div>
                     <div>
-                      <p className="text-sm text-textLight dark:text-white/80 mb-1">Phone</p>
+                      <p className="text-sm text-textLight mb-1">Phone</p>
                       <p className="text-sm font-medium">+977 1-XXXXXXX</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted dark:bg-white/10">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted">
                       <LuMapPin className="h-5 w-5 text-secondary" />
                     </div>
                     <div>
-                      <p className="text-sm text-textLight dark:text-white/80 mb-1">Address</p>
+                      <p className="text-sm text-textLight mb-1">Address</p>
                       <p className="text-sm font-medium">
                         Kathmandu, Nepal
                         <br />
@@ -94,11 +94,11 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted dark:bg-white/10">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted">
                       <LuClock className="h-5 w-5 text-secondary" />
                     </div>
                     <div>
-                      <p className="text-sm text-textLight dark:text-white/80 mb-1">Office Hours</p>
+                      <p className="text-sm text-textLight mb-1">Office Hours</p>
                       <p className="text-sm font-medium">
                         Sun - Fri: 10:00 AM - 5:00 PM
                         <br />
@@ -108,8 +108,8 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-border dark:border-white/10">
-                  <p className="text-sm text-textLight dark:text-white/80 mb-4">Follow us</p>
+                <div className="mt-8 pt-6 border-t border-border">
+                  <p className="text-sm text-textLight mb-4">Follow us</p>
                   <div className="flex gap-3">
                     {[
                       { label: "Facebook", icon: <CiFacebook className="h-5 w-5" /> },
@@ -121,7 +121,7 @@ export default function ContactPage() {
                         key={social.label}
                         href="#"
                         aria-label={social.label}
-                        className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted dark:bg-white/10 text-textLight dark:text-white/80 transition-all duration-200 hover:bg-secondary hover:text-white"
+                        className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-textLight transition-all duration-200 hover:bg-secondary hover:text-white"
                       >
                         {social.icon}
                       </a>

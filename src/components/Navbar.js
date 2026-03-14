@@ -28,8 +28,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 bg-background/95 border-b ${
         scrolled
-          ? "border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.06)] dark:border-white/5 dark:shadow-none"
-          : "border-border/30 dark:border-white/3"
+          ? "border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+          : "border-border/30"
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -54,7 +54,7 @@ export default function Navbar() {
                   className={`relative px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive
                       ? "text-secondary bg-secondary/8"
-                      : "text-textLight hover:text-text hover:bg-surface/80 dark:hover:bg-white/5"
+                      : "text-textLight hover:text-text hover:bg-surface/80"
                   }`}
                 >
                   {link.label}

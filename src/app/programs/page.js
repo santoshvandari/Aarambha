@@ -62,12 +62,12 @@ const programs = [
 export default function ProgramsPage() {
   return (
     <>
-      <section className="bg-muted dark:bg-heroDark text-text dark:text-white pt-28 pb-20">
+      <section className="bg-muted text-text pt-28 pb-20">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center rounded-full bg-surface dark:bg-white/10 px-4 py-1.5 text-sm font-medium text-textLight dark:text-white/80 border border-border dark:border-white/15 mb-6"
+            className="inline-flex items-center rounded-full bg-surface px-4 py-1.5 text-sm font-medium text-textLight border border-border mb-6"
           >
             What We Do
           </motion.span>
@@ -75,7 +75,7 @@ export default function ProgramsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="text-4xl sm:text-5xl font-heading font-bold text-text dark:text-white mb-5 leading-tight"
+            className="text-4xl sm:text-5xl font-heading font-bold text-text mb-5 leading-tight"
           >
             Our Programs
           </motion.h1>
@@ -83,7 +83,7 @@ export default function ProgramsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-textLight dark:text-white/80 max-w-2xl mx-auto"
+            className="text-lg text-textLight max-w-2xl mx-auto"
           >
             Explore our diverse range of programs designed to create meaningful impact across communities.
           </motion.p>

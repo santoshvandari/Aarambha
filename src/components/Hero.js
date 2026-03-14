@@ -58,7 +58,7 @@ export default function Hero({
   };
 
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-background dark:bg-heroDark text-text dark:text-white py-28 border-b border-border dark:border-white/10">
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-background text-text py-28 border-b border-border">
       {isDark ? (
         <div className="absolute inset-0">
           <Image
@@ -95,7 +95,7 @@ export default function Hero({
           {/* Badge */}
           <motion.div
             variants={item}
-            className="mb-6 inline-flex items-center gap-2 rounded-full bg-surface dark:bg-white/12 px-4 py-2 text-sm font-medium text-text dark:text-white/90 border border-border dark:border-white/25"
+            className="mb-6 inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-medium text-text border border-border"
           >
             <LuSparkles className="h-3.5 w-3.5 text-accent" />
             Nonprofit Social Club
@@ -104,7 +104,7 @@ export default function Hero({
           {/* Title */}
           <motion.h1
             variants={item}
-            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-text dark:text-white leading-[1.1] tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-text leading-[1.1] tracking-tight"
           >
             {title}
           </motion.h1>
@@ -120,7 +120,7 @@ export default function Hero({
           {/* Description */}
           <motion.p
             variants={item}
-            className="mt-6 text-base sm:text-lg text-textLight dark:text-white/85 leading-relaxed max-w-2xl mx-auto"
+            className="mt-6 text-base sm:text-lg text-textLight leading-relaxed max-w-2xl mx-auto"
           >
             {description}
           </motion.p>
@@ -150,7 +150,7 @@ export default function Hero({
               href={secondaryCtaHref}
               variant="ghost"
               size="lg"
-              className="border border-border text-text hover:bg-muted hover:border-border dark:border-white/25 dark:text-white dark:hover:bg-white/10 dark:hover:border-white/35"
+              className="border border-border text-text hover:bg-muted hover:border-border"
             >
               {secondaryCtaText}
             </Button>
@@ -171,13 +171,13 @@ export default function Hero({
                 className="flex items-center gap-8 sm:gap-12"
               >
                 {i > 0 && (
-                  <div className="h-8 w-px bg-border dark:bg-white/25 -ml-4 sm:-ml-6" />
+                  <div className="h-8 w-px bg-border -ml-4 sm:-ml-6" />
                 )}
                 <div>
-                  <p className="text-2xl sm:text-3xl font-heading font-bold text-text dark:text-white tracking-tight">
+                  <p className="text-2xl sm:text-3xl font-heading font-bold text-text tracking-tight">
                     {stat.value}
                   </p>
-                  <p className="mt-1 text-xs text-textLight dark:text-white/85 uppercase tracking-wider">
+                  <p className="mt-1 text-xs text-textLight uppercase tracking-wider">
                     {stat.label}
                   </p>
                 </div>

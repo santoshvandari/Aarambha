@@ -24,7 +24,7 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-surface dark:bg-primary text-text dark:text-white border-t border-border dark:border-white/10">
+    <footer className="bg-surface text-text border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Brand column */}
@@ -33,11 +33,11 @@ export default function Footer() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-secondary text-white font-heading font-bold text-sm">
                 A
               </div>
-              <span className="text-xl font-heading font-bold text-text dark:text-white tracking-tight">
+              <span className="text-xl font-heading font-bold text-text tracking-tight">
                 Aarambha
               </span>
             </div>
-            <p className="text-sm leading-relaxed text-textLight dark:text-white/80 mb-6 max-w-xs">
+            <p className="text-sm leading-relaxed text-textLight mb-6 max-w-xs">
               A nonprofit social club dedicated to community empowerment, youth
               development, and creating lasting positive change.
             </p>
@@ -48,7 +48,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted dark:bg-white/10 text-textLight dark:text-white/80 transition-all duration-200 hover:bg-secondary hover:text-white hover:-translate-y-0.5 text-xl"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted text-textLight transition-all duration-200 hover:bg-secondary hover:text-white hover:-translate-y-0.5 text-xl"
                 >
                   {social.icon}
                 </a>
@@ -58,7 +58,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs font-heading font-semibold uppercase tracking-widest text-text dark:text-white/80 mb-5">
+            <h4 className="text-xs font-heading font-semibold uppercase tracking-widest text-text mb-5">
               Quick Links
             </h4>
             <ul className="space-y-3">
@@ -66,7 +66,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-textLight dark:text-white/80 transition-colors hover:text-secondary"
+                    className="text-sm text-textLight transition-colors hover:text-secondary"
                   >
                     {link.label}
                   </Link>
@@ -77,10 +77,10 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-xs font-heading font-semibold uppercase tracking-widest text-text dark:text-white/80 mb-5">
+            <h4 className="text-xs font-heading font-semibold uppercase tracking-widest text-text mb-5">
               Contact
             </h4>
-            <ul className="space-y-4 text-sm text-textLight dark:text-white/80">
+            <ul className="space-y-4 text-sm text-textLight">
               <li className="flex items-center gap-3">
                 <LuMail className="h-4 w-4 shrink-0 text-secondary" />
                 info@aarambha.org
@@ -98,11 +98,11 @@ export default function Footer() {
         </div>
 
         {/* Divider & copyright */}
-        <div className="mt-14 border-t border-border dark:border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-textLight dark:text-white/80">
+        <div className="mt-14 border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-textLight">
             © {new Date().getFullYear()} Aarambha. All rights reserved.
           </p>
-          <p className="text-xs text-textLight dark:text-white/80 inline-flex items-center gap-1.5">
+          <p className="text-xs text-textLight inline-flex items-center gap-1.5">
             Built with
             <LuHeart className="h-3.5 w-3.5 text-secondary" />
             for community
