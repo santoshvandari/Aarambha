@@ -1,4 +1,4 @@
-import type { Variants } from "framer-motion";
+import type { Variants } from 'framer-motion';
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -10,7 +10,7 @@ export const fadeUp: Variants = {
 };
 
 export const inView = {
-  initial: "hidden",
-  whileInView: "visible",
-  viewport: { once: true, margin: "-60px" },
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, margin: '-60px' },
 } as const;

@@ -1,6 +1,6 @@
-import AdminPage from "@/components/admin/AdminPage";
-import ProgramForm from "@/components/admin/ProgramForm";
-import { requireUser } from "@/lib/auth";
+import AdminPage from '@/components/admin/AdminPage';
+import ProgramForm from '@/components/admin/ProgramForm';
+import { requireUser } from '@/lib/auth';
 
 export default async function NewProgramPage() {
   await requireUser();

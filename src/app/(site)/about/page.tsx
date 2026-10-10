@@ -1,21 +1,21 @@
-import { LuRocket, LuEye } from "react-icons/lu";
-import PageHeader from "@/components/PageHeader";
-import SectionTitle from "@/components/SectionTitle";
-import Card from "@/components/Card";
-import CtaBlock from "@/components/CtaBlock";
-import Reveal from "@/components/Reveal";
-import { aboutValues, milestones } from "@/data/site";
+import { LuRocket, LuEye } from 'react-icons/lu';
+import PageHeader from '@/components/PageHeader';
+import SectionTitle from '@/components/SectionTitle';
+import Card from '@/components/Card';
+import CtaBlock from '@/components/CtaBlock';
+import Reveal from '@/components/Reveal';
+import { aboutValues, milestones } from '@/data/site';
 
 const statements = [
   {
     icon: LuRocket,
-    title: "Our Mission",
-    body: "To empower communities through education, social awareness, and sustainable development initiatives. We strive to create an inclusive environment where every individual can contribute to positive social change and personal growth.",
+    title: 'Our Mission',
+    body: 'To empower communities through education, social awareness, and sustainable development initiatives. We strive to create an inclusive environment where every individual can contribute to positive social change and personal growth.',
   },
   {
     icon: LuEye,
-    title: "Our Vision",
-    body: "A society where every young person is equipped with knowledge, skills, and opportunities to lead meaningful change. We envision communities that are self-sustaining, environmentally conscious, and socially harmonious.",
+    title: 'Our Vision',
+    body: 'A society where every young person is equipped with knowledge, skills, and opportunities to lead meaningful change. We envision communities that are self-sustaining, environmentally conscious, and socially harmonious.',
   },
 ];
 
@@ -34,7 +34,9 @@ export default function AboutPage() {
             {statements.map(({ icon: Icon, title, body }, i) => (
               <Reveal key={title} index={i} className="bg-surface p-8 sm:p-12">
                 <Icon className="mb-6 h-7 w-7 text-secondary" aria-hidden="true" />
-                <h2 className="mb-4 font-heading text-2xl font-bold tracking-tight text-text">{title}</h2>
+                <h2 className="mb-4 font-heading text-2xl font-bold tracking-tight text-text">
+                  {title}
+                </h2>
                 <p className="leading-relaxed text-text">{body}</p>
               </Reveal>
             ))}
@@ -76,12 +78,19 @@ export default function AboutPage() {
           </Reveal>
           <ol className="max-w-3xl border-l-2 border-border">
             {milestones.map((milestone, i) => (
-              <Reveal as="li" key={milestone.year} index={i} className="relative pb-10 pl-8 last:pb-0">
+              <Reveal
+                as="li"
+                key={milestone.year}
+                index={i}
+                className="relative pb-10 pl-8 last:pb-0"
+              >
                 <span
-                  className="absolute -left-[7px] top-1.5 h-3 w-3 bg-secondary"
+                  className="absolute top-1.5 -left-[7px] h-3 w-3 bg-secondary"
                   aria-hidden="true"
                 />
-                <p className="font-heading text-sm font-bold tracking-wider text-text">{milestone.year}</p>
+                <p className="font-heading text-sm font-bold tracking-wider text-text">
+                  {milestone.year}
+                </p>
                 <h3 className="mt-1 font-heading text-xl font-bold tracking-tight text-text">
                   {milestone.title}
                 </h3>
@@ -95,8 +104,8 @@ export default function AboutPage() {
       <CtaBlock
         title="Be part of what comes next"
         description="Aarambha grows through the people who give their time. Volunteer with a program or join as a member."
-        primary={{ label: "Become a Volunteer", href: "/contact?type=volunteer" }}
-        secondary={{ label: "Become a Member", href: "/contact?type=member" }}
+        primary={{ label: 'Become a Volunteer', href: '/contact?type=volunteer' }}
+        secondary={{ label: 'Become a Member', href: '/contact?type=member' }}
       />
     </>
   );

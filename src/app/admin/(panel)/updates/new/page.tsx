@@ -1,7 +1,7 @@
-import AdminPage from "@/components/admin/AdminPage";
-import StoryForm from "@/components/admin/StoryForm";
-import { requireUser } from "@/lib/auth";
-import { getPrograms } from "@/lib/content";
+import AdminPage from '@/components/admin/AdminPage';
+import StoryForm from '@/components/admin/StoryForm';
+import { requireUser } from '@/lib/auth';
+import { getPrograms } from '@/lib/content';
 
 export default async function NewUpdatePage() {
   await requireUser();

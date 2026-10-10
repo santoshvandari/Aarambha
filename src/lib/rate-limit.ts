@@ -1,26 +1,26 @@
-import { headers } from "next/headers";
-import { lt, sql } from "drizzle-orm";
-import { db } from "@/db";
-import { rateLimits } from "@/db/schema";
+import { headers } from 'next/headers';
+import { lt, sql } from 'drizzle-orm';
+import { db } from '@/db';
+import { rateLimits } from '@/db/schema';
 
 const MINUTE = 60 * 1_000;
 
 export const RATE_LIMITS = {
   contact: { max: 5, windowMs: 10 * MINUTE },
-  "login-ip": { max: 10, windowMs: 15 * MINUTE },
-  "login-email": { max: 5, windowMs: 15 * MINUTE },
+  'login-ip': { max: 10, windowMs: 15 * MINUTE },
+  'login-email': { max: 5, windowMs: 15 * MINUTE },
   password: { max: 5, windowMs: 15 * MINUTE },
   upload: { max: 30, windowMs: 10 * MINUTE },
-  "user-admin": { max: 10, windowMs: 60 * MINUTE },
+  'user-admin': { max: 10, windowMs: 60 * MINUTE },
 } as const;
 
 export async function getClientIp() {
   const requestHeaders = await headers();
   return (
-    requestHeaders.get("cf-connecting-ip") ??
-    requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-    requestHeaders.get("x-real-ip") ??
-    "unknown"
+    requestHeaders.get('cf-connecting-ip') ??
+    requestHeaders.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    requestHeaders.get('x-real-ip') ??
+    'unknown'
   );
 }
 

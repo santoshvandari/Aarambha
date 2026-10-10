@@ -1,14 +1,14 @@
-import { Suspense } from "react";
-import { LuMail, LuPhone, LuMapPin, LuClock } from "react-icons/lu";
-import PageHeader from "@/components/PageHeader";
-import ContactForm from "@/components/ContactForm";
-import { site, socialLinks } from "@/data/site";
+import { Suspense } from 'react';
+import { LuMail, LuPhone, LuMapPin, LuClock } from 'react-icons/lu';
+import PageHeader from '@/components/PageHeader';
+import ContactForm from '@/components/ContactForm';
+import { site, socialLinks } from '@/data/site';
 
 const details = [
-  { icon: LuMail, label: "Email", lines: [site.email], href: `mailto:${site.email}` },
-  { icon: LuPhone, label: "Phone", lines: [site.phone] },
-  { icon: LuMapPin, label: "Address", lines: [site.city, site.province] },
-  { icon: LuClock, label: "Office Hours", lines: site.officeHours },
+  { icon: LuMail, label: 'Email', lines: [site.email], href: `mailto:${site.email}` },
+  { icon: LuPhone, label: 'Phone', lines: [site.phone] },
+  { icon: LuMapPin, label: 'Address', lines: [site.city, site.province] },
+  { icon: LuClock, label: 'Office Hours', lines: site.officeHours },
 ];
 
 export default function ContactPage() {
@@ -24,7 +24,9 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-[1fr_1.6fr]">
           <aside className="order-2 lg:order-1">
             <div className="rounded-lg border border-border bg-muted p-8 lg:sticky lg:top-28">
-              <h2 className="mb-8 font-heading text-xl font-bold tracking-tight text-text">Get in Touch</h2>
+              <h2 className="mb-8 font-heading text-xl font-bold tracking-tight text-text">
+                Get in Touch
+              </h2>
               <dl className="space-y-6">
                 {details.map(({ icon: Icon, label, lines, href }) => (
                   <div key={label} className="flex items-start gap-4">

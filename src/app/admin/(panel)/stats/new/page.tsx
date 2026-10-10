@@ -1,6 +1,6 @@
-import AdminPage from "@/components/admin/AdminPage";
-import StatForm from "@/components/admin/StatForm";
-import { requireUser } from "@/lib/auth";
+import AdminPage from '@/components/admin/AdminPage';
+import StatForm from '@/components/admin/StatForm';
+import { requireUser } from '@/lib/auth';
 
 export default async function NewStatPage() {
   await requireUser();

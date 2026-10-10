@@ -7,8 +7,8 @@ import {
   S3Client,
   type S3ClientConfig,
   type S3ServiceException,
-} from "@aws-sdk/client-s3";
-import { NodeHttpHandler } from "@smithy/node-http-handler";
+} from '@aws-sdk/client-s3';
+import { NodeHttpHandler } from '@smithy/node-http-handler';
 
 interface StorageConfig {
   endpoint: string;
@@ -31,16 +31,16 @@ const getStorageConfig = (): StorageConfig => {
   } = process.env;
 
   if (!OBJECT_STORAGE_ENDPOINT || !OBJECT_STORAGE_ACCESS_KEY || !OBJECT_STORAGE_SECRET_KEY) {
-    throw new Error("Missing required OBJECT_STORAGE environment variables");
+    throw new Error('Missing required OBJECT_STORAGE environment variables');
   }
 
   return {
     endpoint: OBJECT_STORAGE_ENDPOINT,
-    publicEndpoint: (OBJECT_STORAGE_PUBLIC_ENDPOINT || OBJECT_STORAGE_ENDPOINT).replace(/\/+$/, ""),
+    publicEndpoint: (OBJECT_STORAGE_PUBLIC_ENDPOINT || OBJECT_STORAGE_ENDPOINT).replace(/\/+$/, ''),
     accessKeyId: OBJECT_STORAGE_ACCESS_KEY,
     secretAccessKey: OBJECT_STORAGE_SECRET_KEY,
-    bucketName: OBJECT_STORAGE_BUCKET || "aarambha",
-    regionName: OBJECT_STORAGE_REGION || "us-east-1",
+    bucketName: OBJECT_STORAGE_BUCKET || 'aarambha',
+    regionName: OBJECT_STORAGE_REGION || 'us-east-1',
   };
 };
 
@@ -66,12 +66,12 @@ const s3Client = new S3Client(s3ClientConfig);
 
 // Anyone can read objects (site images); only the server can write
 const publicReadPolicy = JSON.stringify({
-  Version: "2012-10-17",
+  Version: '2012-10-17',
   Statement: [
     {
-      Effect: "Allow",
-      Principal: { AWS: ["*"] },
-      Action: ["s3:GetObject"],
+      Effect: 'Allow',
+      Principal: { AWS: ['*'] },
+      Action: ['s3:GetObject'],
       Resource: [`arn:aws:s3:::${config.bucketName}/*`],
     },
   ],
@@ -92,7 +92,7 @@ async function initializeBucket(): Promise<void> {
         console.info(`[Storage] Bucket "${config.bucketName}" created successfully.`);
       } catch (createError) {
         const cError = createError as S3ServiceException;
-        if (cError.name !== "BucketAlreadyOwnedByYou" && cError.name !== "BucketAlreadyExists") {
+        if (cError.name !== 'BucketAlreadyOwnedByYou' && cError.name !== 'BucketAlreadyExists') {
           throw cError;
         }
       }
@@ -103,7 +103,9 @@ async function initializeBucket(): Promise<void> {
     }
   }
 
-  await s3Client.send(new PutBucketPolicyCommand({ Bucket: config.bucketName, Policy: publicReadPolicy }));
+  await s3Client.send(
+    new PutBucketPolicyCommand({ Bucket: config.bucketName, Policy: publicReadPolicy })
+  );
 }
 
 function publicUrl(key: string) {
@@ -112,7 +114,12 @@ function publicUrl(key: string) {
 
 async function uploadObject(key: string, body: Uint8Array, contentType: string) {
   await s3Client.send(
-    new PutObjectCommand({ Bucket: config.bucketName, Key: key, Body: body, ContentType: contentType })
+    new PutObjectCommand({
+      Bucket: config.bucketName,
+      Key: key,
+      Body: body,
+      ContentType: contentType,
+    })
   );
 }
 

@@ -1,5 +1,5 @@
-import { LuMoveRight } from "react-icons/lu";
-import Button from "./Button";
+import { LuMoveRight } from 'react-icons/lu';
+import Button from './Button';
 
 interface CtaBlockProps {
   title: string;
@@ -13,7 +13,7 @@ export default function CtaBlock({ title, description, primary, secondary }: Cta
     <section className="border-t-4 border-accent bg-cta text-ctaText">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[1.4fr_1fr] md:items-end md:py-24">
         <div>
-          <h2 className="font-heading text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+          <h2 className="font-heading text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:text-5xl">
             {title}
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ctaMuted">{description}</p>

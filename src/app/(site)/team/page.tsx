@@ -1,9 +1,9 @@
-import PageHeader from "@/components/PageHeader";
-import SectionTitle from "@/components/SectionTitle";
-import TeamCard from "@/components/TeamCard";
-import CtaBlock from "@/components/CtaBlock";
-import Reveal from "@/components/Reveal";
-import { teamMembers } from "@/data/site";
+import PageHeader from '@/components/PageHeader';
+import SectionTitle from '@/components/SectionTitle';
+import TeamCard from '@/components/TeamCard';
+import CtaBlock from '@/components/CtaBlock';
+import Reveal from '@/components/Reveal';
+import { teamMembers } from '@/data/site';
 
 export default function TeamPage() {
   return (
@@ -32,8 +32,8 @@ export default function TeamPage() {
       <CtaBlock
         title="Join Our Team"
         description="We're always looking for passionate individuals who want to make a difference. Become part of our growing family."
-        primary={{ label: "Become a Volunteer", href: "/contact?type=volunteer" }}
-        secondary={{ label: "Become a Member", href: "/contact?type=member" }}
+        primary={{ label: 'Become a Volunteer', href: '/contact?type=volunteer' }}
+        secondary={{ label: 'Become a Member', href: '/contact?type=member' }}
       />
     </>
   );

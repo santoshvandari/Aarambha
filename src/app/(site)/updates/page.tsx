@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import PageHeader from "@/components/PageHeader";
-import StoryCard from "@/components/StoryCard";
-import Reveal from "@/components/Reveal";
-import CtaBlock from "@/components/CtaBlock";
-import { getPublishedStories } from "@/lib/content";
+import type { Metadata } from 'next';
+import PageHeader from '@/components/PageHeader';
+import StoryCard from '@/components/StoryCard';
+import Reveal from '@/components/Reveal';
+import CtaBlock from '@/components/CtaBlock';
+import { getPublishedStories } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: "Field Updates — Aarambha",
+  title: 'Field Updates — Aarambha',
   description: "News and reports from Aarambha's programs and volunteers in Jhapa, Nepal.",
 };
 
@@ -40,7 +40,7 @@ export default async function UpdatesPage() {
       <CtaBlock
         title="Want to be part of the next story?"
         description="Every update here was made possible by volunteers. Join a program and help write the next one."
-        primary={{ label: "Volunteer With Us", href: "/contact?type=volunteer" }}
+        primary={{ label: 'Volunteer With Us', href: '/contact?type=volunteer' }}
       />
     </>
   );

@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { LuMail, LuPhone, LuMapPin } from "react-icons/lu";
-import { navLinks, site, socialLinks } from "@/data/site";
-import Logo from "./Logo";
+import Link from 'next/link';
+import { LuMail, LuPhone, LuMapPin } from 'react-icons/lu';
+import { navLinks, site, socialLinks } from '@/data/site';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -20,7 +20,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-md border border-border text-xl text-footerText transition-colors hover:border-text hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+                  className="flex h-10 w-10 items-center justify-center rounded-md border border-border text-xl text-footerText transition-colors hover:border-text hover:text-text focus-visible:ring-2 focus-visible:ring-secondary focus-visible:outline-none"
                 >
                   <Icon aria-hidden="true" />
                 </a>
@@ -29,7 +29,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-text">Quick Links</h2>
+            <h2 className="mb-5 text-xs font-semibold tracking-[0.16em] text-text uppercase">
+              Quick Links
+            </h2>
             <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -42,7 +44,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-text">Contact</h2>
+            <h2 className="mb-5 text-xs font-semibold tracking-[0.16em] text-text uppercase">
+              Contact
+            </h2>
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
                 <LuMail className="h-4 w-4 shrink-0 text-secondaryText" aria-hidden="true" />
@@ -64,7 +68,9 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs sm:flex-row">
           <p>© {new Date().getFullYear()} Aarambha. All rights reserved.</p>
-          <p>Founded {site.founded} · {site.city}</p>
+          <p>
+            Founded {site.founded} · {site.city}
+          </p>
         </div>
       </div>
     </footer>

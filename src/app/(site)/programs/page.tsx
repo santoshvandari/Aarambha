@@ -1,13 +1,13 @@
-import PageHeader from "@/components/PageHeader";
-import SectionTitle from "@/components/SectionTitle";
-import ProgramCard from "@/components/ProgramCard";
-import StatGrid from "@/components/StatGrid";
-import CtaBlock from "@/components/CtaBlock";
-import Reveal from "@/components/Reveal";
-import { getPrograms, getStats } from "@/lib/content";
+import PageHeader from '@/components/PageHeader';
+import SectionTitle from '@/components/SectionTitle';
+import ProgramCard from '@/components/ProgramCard';
+import StatGrid from '@/components/StatGrid';
+import CtaBlock from '@/components/CtaBlock';
+import Reveal from '@/components/Reveal';
+import { getPrograms, getStats } from '@/lib/content';
 
 export default async function ProgramsPage() {
-  const [programs, programStats] = await Promise.all([getPrograms(), getStats("programs")]);
+  const [programs, programStats] = await Promise.all([getPrograms(), getStats('programs')]);
 
   return (
     <>
@@ -47,8 +47,8 @@ export default async function ProgramsPage() {
       <CtaBlock
         title="Want to help run a program?"
         description="Every program is run by volunteers. Tell us where you'd like to help and we'll get in touch."
-        primary={{ label: "Volunteer With Us", href: "/contact?type=volunteer" }}
-        secondary={{ label: "Ask a Question", href: "/contact" }}
+        primary={{ label: 'Volunteer With Us', href: '/contact?type=volunteer' }}
+        secondary={{ label: 'Ask a Question', href: '/contact' }}
       />
     </>
   );

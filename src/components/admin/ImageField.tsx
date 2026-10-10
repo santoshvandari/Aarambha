@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useRef, useState } from "react";
-import { uploadImage } from "./uploadImage";
+import { useRef, useState } from 'react';
+import { uploadImage } from './uploadImage';
 
 interface ImageFieldProps {
   name: string;
@@ -11,32 +11,36 @@ interface ImageFieldProps {
 // Uploads as soon as a file is picked; the form only submits the stored object key
 export default function ImageField({ name, initial = null }: ImageFieldProps) {
   const [image, setImage] = useState(initial);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleFile(file: File | undefined) {
     if (!file) return;
-    setStatus("Uploading…");
+    setStatus('Uploading…');
     try {
       setImage(await uploadImage(file));
-      setStatus("");
+      setStatus('');
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : "Upload failed.");
+      setStatus(error instanceof Error ? error.message : 'Upload failed.');
     } finally {
-      if (inputRef.current) inputRef.current.value = "";
+      if (inputRef.current) inputRef.current.value = '';
     }
   }
 
   return (
     <div>
-      <input type="hidden" name={name} value={image?.key ?? ""} />
+      <input type="hidden" name={name} value={image?.key ?? ''} />
       {image && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={image.url} alt="" className="mb-3 aspect-[16/9] w-full rounded-md border border-border object-cover" />
+        <img
+          src={image.url}
+          alt=""
+          className="mb-3 aspect-[16/9] w-full rounded-md border border-border object-cover"
+        />
       )}
       <div className="flex flex-wrap items-center gap-3">
         <label className="cursor-pointer rounded-md border border-slate-400 px-4 py-2 text-sm font-semibold text-text hover:bg-text hover:text-background dark:border-slate-500">
-          {image ? "Replace image" : "Upload image"}
+          {image ? 'Replace image' : 'Upload image'}
           <input
             ref={inputRef}
             type="file"
@@ -46,7 +50,11 @@ export default function ImageField({ name, initial = null }: ImageFieldProps) {
           />
         </label>
         {image && (
-          <button type="button" onClick={() => setImage(null)} className="text-sm font-semibold text-textLight hover:text-text">
+          <button
+            type="button"
+            onClick={() => setImage(null)}
+            className="text-sm font-semibold text-textLight hover:text-text"
+          >
             Remove
           </button>
         )}

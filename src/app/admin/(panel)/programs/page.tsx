@@ -1,9 +1,9 @@
-import Link from "next/link";
-import AdminPage from "@/components/admin/AdminPage";
-import Button from "@/components/Button";
-import { requireUser } from "@/lib/auth";
-import { getPrograms } from "@/lib/content";
-import { ProgramIcon } from "@/lib/icons";
+import Link from 'next/link';
+import AdminPage from '@/components/admin/AdminPage';
+import Button from '@/components/Button';
+import { requireUser } from '@/lib/auth';
+import { getPrograms } from '@/lib/content';
+import { ProgramIcon } from '@/lib/icons';
 
 export default async function ProgramsAdminPage() {
   await requireUser();
@@ -24,8 +24,13 @@ export default async function ProgramsAdminPage() {
               <p className="truncate text-sm text-textLight">{program.summary}</p>
             </div>
             {program.featured && <span className="text-xs text-secondaryText">Featured</span>}
-            <span className="text-xs uppercase tracking-wider text-textLight">{program.status}</span>
-            <Link href={`/admin/programs/${program.id}`} className="text-sm font-semibold text-secondaryText hover:underline">
+            <span className="text-xs tracking-wider text-textLight uppercase">
+              {program.status}
+            </span>
+            <Link
+              href={`/admin/programs/${program.id}`}
+              className="text-sm font-semibold text-secondaryText hover:underline"
+            >
               Edit
             </Link>
           </li>

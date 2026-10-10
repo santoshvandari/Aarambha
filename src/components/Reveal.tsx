@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import type { ReactNode } from "react";
-import { motion } from "framer-motion";
-import { fadeUp, inView } from "@/lib/motion";
+import type { ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import { fadeUp, inView } from '@/lib/motion';
 
 const tags = { div: motion.div, li: motion.li, article: motion.article };
 
@@ -15,7 +15,7 @@ interface RevealProps {
 }
 
 // Fades content up as it scrolls into view, so pages can stay server components
-export default function Reveal({ children, index = 0, as = "div", className }: RevealProps) {
+export default function Reveal({ children, index = 0, as = 'div', className }: RevealProps) {
   const Tag = tags[as];
   return (
     <Tag variants={fadeUp} {...inView} custom={index} className={className}>

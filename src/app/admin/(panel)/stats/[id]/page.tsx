@@ -1,14 +1,14 @@
-import { notFound } from "next/navigation";
-import { eq } from "drizzle-orm";
-import { db } from "@/db";
-import { stats } from "@/db/schema";
-import AdminPage from "@/components/admin/AdminPage";
-import ConfirmButton from "@/components/admin/ConfirmButton";
-import { dangerButtonClass } from "@/components/admin/Field";
-import StatForm from "@/components/admin/StatForm";
-import { requireUser } from "@/lib/auth";
-import { isUuid } from "@/lib/forms";
-import { deleteStat } from "../actions";
+import { notFound } from 'next/navigation';
+import { eq } from 'drizzle-orm';
+import { db } from '@/db';
+import { stats } from '@/db/schema';
+import AdminPage from '@/components/admin/AdminPage';
+import ConfirmButton from '@/components/admin/ConfirmButton';
+import { dangerButtonClass } from '@/components/admin/Field';
+import StatForm from '@/components/admin/StatForm';
+import { requireUser } from '@/lib/auth';
+import { isUuid } from '@/lib/forms';
+import { deleteStat } from '../actions';
 
 export default async function EditStatPage({ params }: { params: Promise<{ id: string }> }) {
   await requireUser();
@@ -22,7 +22,10 @@ export default async function EditStatPage({ params }: { params: Promise<{ id: s
       title={`${stat.value} ${stat.label}`}
       actions={
         <form action={deleteStat.bind(null, stat.id)}>
-          <ConfirmButton message={`Delete "${stat.value} ${stat.label}"?`} className={dangerButtonClass}>
+          <ConfirmButton
+            message={`Delete "${stat.value} ${stat.label}"?`}
+            className={dangerButtonClass}
+          >
             Delete
           </ConfirmButton>
         </form>

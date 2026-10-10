@@ -1,5 +1,5 @@
 // Line drawing of Himalayan ridges; sits at the base of the hero and page headers
-export default function Ridgeline({ className = "" }: { className?: string }) {
+export default function Ridgeline({ className = '' }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 1440 160"

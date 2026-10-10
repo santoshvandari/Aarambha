@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
-import Link from "next/link";
-import Logo from "@/components/Logo";
-import ThemeToggle from "@/components/ThemeToggle";
-import AdminNav from "@/components/admin/AdminNav";
-import { requireUser } from "@/lib/auth";
-import { signOut } from "../actions";
+import type { ReactNode } from 'react';
+import Link from 'next/link';
+import Logo from '@/components/Logo';
+import ThemeToggle from '@/components/ThemeToggle';
+import AdminNav from '@/components/admin/AdminNav';
+import { requireUser } from '@/lib/auth';
+import { signOut } from '../actions';
 
 export default async function PanelLayout({ children }: { children: ReactNode }) {
   const user = await requireUser();
@@ -15,7 +15,10 @@ export default async function PanelLayout({ children }: { children: ReactNode })
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
           <Logo />
           <div className="flex items-center gap-3">
-            <Link href="/admin/password" className="hidden text-sm text-textLight hover:text-text sm:inline">
+            <Link
+              href="/admin/password"
+              className="hidden text-sm text-textLight hover:text-text sm:inline"
+            >
               {user.name} · Change password
             </Link>
             <ThemeToggle />
@@ -29,7 +32,7 @@ export default async function PanelLayout({ children }: { children: ReactNode })
             </form>
           </div>
         </div>
-        <AdminNav isAdmin={user.role === "admin"} />
+        <AdminNav isAdmin={user.role === 'admin'} />
       </header>
       <main>{children}</main>
     </>

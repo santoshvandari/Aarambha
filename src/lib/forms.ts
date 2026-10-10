@@ -6,11 +6,11 @@ export interface FormState {
 
 export function text(formData: FormData, name: string) {
   const value = formData.get(name);
-  return typeof value === "string" ? value.trim() : "";
+  return typeof value === 'string' ? value.trim() : '';
 }
 
 export function checked(formData: FormData, name: string) {
-  return formData.get(name) === "on";
+  return formData.get(name) === 'on';
 }
 
 // Guards database lookups from malformed ids in the URL, which Postgres would reject with an error

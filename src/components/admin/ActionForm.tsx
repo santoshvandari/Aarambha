@@ -1,8 +1,15 @@
-"use client";
+'use client';
 
-import { startTransition, useActionState, useEffect, useRef, type FormEvent, type ReactNode } from "react";
-import type { FormState } from "@/lib/forms";
-import Button from "@/components/Button";
+import {
+  startTransition,
+  useActionState,
+  useEffect,
+  useRef,
+  type FormEvent,
+  type ReactNode,
+} from 'react';
+import type { FormState } from '@/lib/forms';
+import Button from '@/components/Button';
 
 interface ActionFormProps {
   action: (prev: FormState, formData: FormData) => Promise<FormState>;
@@ -12,7 +19,12 @@ interface ActionFormProps {
 }
 
 // Shows the server's error or success message and keeps what was typed until the action succeeds
-export default function ActionForm({ action, submitLabel, children, className = "space-y-6" }: ActionFormProps) {
+export default function ActionForm({
+  action,
+  submitLabel,
+  children,
+  className = 'space-y-6',
+}: ActionFormProps) {
   const [state, formAction, pending] = useActionState(action, {});
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -31,17 +43,23 @@ export default function ActionForm({ action, submitLabel, children, className = 
     <form ref={formRef} onSubmit={handleSubmit} className={className}>
       {children}
       {state.error && (
-        <p role="alert" className="rounded-md border-l-4 border-red-600 bg-muted p-4 text-sm font-medium text-text">
+        <p
+          role="alert"
+          className="rounded-md border-l-4 border-red-600 bg-muted p-4 text-sm font-medium text-text"
+        >
           {state.error}
         </p>
       )}
       {state.notice && (
-        <p role="status" className="rounded-md border-l-4 border-secondary bg-muted p-4 text-sm font-medium text-text">
+        <p
+          role="status"
+          className="rounded-md border-l-4 border-secondary bg-muted p-4 text-sm font-medium text-text"
+        >
           {state.notice}
         </p>
       )}
       <Button type="submit" disabled={pending}>
-        {pending ? "Saving…" : submitLabel}
+        {pending ? 'Saving…' : submitLabel}
       </Button>
     </form>
   );

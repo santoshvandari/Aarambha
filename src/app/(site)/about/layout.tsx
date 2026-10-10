@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: "About — Aarambha",
+  title: 'About — Aarambha',
   description:
     "Learn about Aarambha's mission, vision, and the journey of a nonprofit social club dedicated to community empowerment.",
 };

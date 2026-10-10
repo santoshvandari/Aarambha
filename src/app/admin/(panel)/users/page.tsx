@@ -1,13 +1,13 @@
-import Link from "next/link";
-import { asc } from "drizzle-orm";
-import { db } from "@/db";
-import { users } from "@/db/schema";
-import AdminPage from "@/components/admin/AdminPage";
-import ActionForm from "@/components/admin/ActionForm";
-import Field, { inputClass } from "@/components/admin/Field";
-import RoleSelect from "@/components/admin/RoleSelect";
-import { requireAdmin } from "@/lib/auth";
-import { createUser } from "./actions";
+import Link from 'next/link';
+import { asc } from 'drizzle-orm';
+import { db } from '@/db';
+import { users } from '@/db/schema';
+import AdminPage from '@/components/admin/AdminPage';
+import ActionForm from '@/components/admin/ActionForm';
+import Field, { inputClass } from '@/components/admin/Field';
+import RoleSelect from '@/components/admin/RoleSelect';
+import { requireAdmin } from '@/lib/auth';
+import { createUser } from './actions';
 
 export default async function UsersPage() {
   const me = await requireAdmin();
@@ -22,7 +22,9 @@ export default async function UsersPage() {
               <div className="min-w-0">
                 <p className="truncate font-semibold text-text">
                   {user.name}
-                  {user.id === me.id && <span className="ml-2 text-xs font-normal text-textLight">(you)</span>}
+                  {user.id === me.id && (
+                    <span className="ml-2 text-xs font-normal text-textLight">(you)</span>
+                  )}
                 </p>
                 <p className="truncate text-sm text-textLight">{user.email}</p>
               </div>
@@ -30,10 +32,13 @@ export default async function UsersPage() {
                 {user.mustChangePassword && (
                   <span className="text-xs text-accentText">Temporary password</span>
                 )}
-                <span className="rounded-sm border border-border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-textLight">
+                <span className="rounded-sm border border-border px-2 py-0.5 text-[11px] font-semibold tracking-wider text-textLight uppercase">
                   {user.role}
                 </span>
-                <Link href={`/admin/users/${user.id}`} className="text-sm font-semibold text-secondaryText hover:underline">
+                <Link
+                  href={`/admin/users/${user.id}`}
+                  className="text-sm font-semibold text-secondaryText hover:underline"
+                >
                   Edit
                 </Link>
               </div>
@@ -42,7 +47,9 @@ export default async function UsersPage() {
         </ul>
 
         <section className="rounded-lg border border-border bg-surface p-6 shadow-sm">
-          <h2 className="mb-1 font-heading text-lg font-bold tracking-tight text-text">Add a user</h2>
+          <h2 className="mb-1 font-heading text-lg font-bold tracking-tight text-text">
+            Add a user
+          </h2>
           <p className="mb-6 text-sm text-textLight">
             They get a temporary password by email and must change it after signing in.
           </p>

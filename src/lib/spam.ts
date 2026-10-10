@@ -1,4 +1,4 @@
-import { createHmac, timingSafeEqual } from "node:crypto";
+import { createHmac, timingSafeEqual } from 'node:crypto';
 
 // Keyless spam protection: a signed render timestamp and a link filter (rate limits live in rate-limit.ts).
 // The signing key is derived from DATABASE_URL, so no extra environment variable is needed.
@@ -8,11 +8,13 @@ const MAX_FILL_MS = 24 * 60 * 60 * 1_000;
 const MAX_LINKS = 2;
 
 function signingKey() {
-  return createHmac("sha256", process.env.DATABASE_URL ?? "aarambha-dev").update("form-timestamp").digest();
+  return createHmac('sha256', process.env.DATABASE_URL ?? 'aarambha-dev')
+    .update('form-timestamp')
+    .digest();
 }
 
 function sign(timestamp: string) {
-  return createHmac("sha256", signingKey()).update(timestamp).digest("base64url");
+  return createHmac('sha256', signingKey()).update(timestamp).digest('base64url');
 }
 
 export function createFormToken(now = Date.now()) {
@@ -22,7 +24,7 @@ export function createFormToken(now = Date.now()) {
 
 // Rejects missing or forged tokens, and forms submitted faster than a person can type
 export function isHumanPaced(token: string, now = Date.now()) {
-  const [timestamp, signature] = token.split(".");
+  const [timestamp, signature] = token.split('.');
   if (!timestamp || !signature) return false;
 
   const expected = Buffer.from(sign(timestamp));

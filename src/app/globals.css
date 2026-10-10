@@ -1,52 +1,52 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --color-primary: #0F172A;
-  --color-secondary: #0D9488;
-  --color-secondaryText: #0F766E;
-  --color-accent: #D97706;
-  --color-accentText: #B45309;
-  --color-background: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-muted: #F1F5F9;
-  --color-text: #1E293B;
-  --color-textLight: #64748B;
-  --color-border: #E2E8F0;
+  --color-primary: #0f172a;
+  --color-secondary: #0d9488;
+  --color-secondaryText: #0f766e;
+  --color-accent: #d97706;
+  --color-accentText: #b45309;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-muted: #f1f5f9;
+  --color-text: #1e293b;
+  --color-textLight: #64748b;
+  --color-border: #e2e8f0;
 
-  --color-hero: #F1F5F9;
-  --color-heroText: #0F172A;
+  --color-hero: #f1f5f9;
+  --color-heroText: #0f172a;
   --color-heroMuted: #475569;
-  --color-heroBorder: #CBD5E1;
-  --color-heroPanel: #FFFFFF;
-  --color-cta: #E3F4F1;
-  --color-ctaText: #0F172A;
+  --color-heroBorder: #cbd5e1;
+  --color-heroPanel: #ffffff;
+  --color-cta: #e3f4f1;
+  --color-ctaText: #0f172a;
   --color-ctaMuted: #334155;
-  --color-footer: #FFFFFF;
+  --color-footer: #ffffff;
   --color-footerText: #475569;
 }
 
 .dark {
-  --color-secondaryText: #2DD4BF;
-  --color-accentText: #F59E0B;
-  --color-background: #070C17;
-  --color-surface: #0F1729;
-  --color-muted: #0A1120;
-  --color-text: #F1F5F9;
-  --color-textLight: #9AA8BD;
-  --color-border: #22304A;
+  --color-secondaryText: #2dd4bf;
+  --color-accentText: #f59e0b;
+  --color-background: #070c17;
+  --color-surface: #0f1729;
+  --color-muted: #0a1120;
+  --color-text: #f1f5f9;
+  --color-textLight: #9aa8bd;
+  --color-border: #22304a;
 
-  --color-hero: #0B1324;
-  --color-heroText: #F8FAFC;
-  --color-heroMuted: #CBD5E1;
-  --color-heroBorder: #22304A;
-  --color-heroPanel: #0F1A2E;
-  --color-cta: #042F2E;
-  --color-ctaText: #F8FAFC;
-  --color-ctaMuted: #CCFBF1;
-  --color-footer: #03060D;
-  --color-footerText: #CBD5E1;
+  --color-hero: #0b1324;
+  --color-heroText: #f8fafc;
+  --color-heroMuted: #cbd5e1;
+  --color-heroBorder: #22304a;
+  --color-heroPanel: #0f1a2e;
+  --color-cta: #042f2e;
+  --color-ctaText: #f8fafc;
+  --color-ctaMuted: #ccfbf1;
+  --color-footer: #03060d;
+  --color-footerText: #cbd5e1;
 }
 
 @theme inline {
@@ -72,8 +72,8 @@
   --color-footer: var(--color-footer);
   --color-footerText: var(--color-footerText);
 
-  --font-heading: var(--font-montserrat), "Montserrat", sans-serif;
-  --font-body: var(--font-open-sans), "Open Sans", sans-serif;
+  --font-heading: var(--font-montserrat), 'Montserrat', sans-serif;
+  --font-body: var(--font-open-sans), 'Open Sans', sans-serif;
 }
 
 html {
@@ -90,11 +90,11 @@ body {
 
 ::selection {
   background-color: var(--color-primary);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .dark ::selection {
-  background-color: #F1F5F9;
+  background-color: #f1f5f9;
   color: #020617;
 }
 

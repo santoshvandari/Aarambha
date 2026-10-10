@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { LuLinkedin, LuTwitter } from "react-icons/lu";
+import Image from 'next/image';
+import { LuLinkedin, LuTwitter } from 'react-icons/lu';
 
 interface TeamCardProps {
   name: string;
@@ -11,8 +11,8 @@ interface TeamCardProps {
 
 export default function TeamCard({ name, position, bio, imageUrl, social }: TeamCardProps) {
   const links = [
-    { href: social?.linkedin, label: "LinkedIn", icon: LuLinkedin },
-    { href: social?.twitter, label: "Twitter", icon: LuTwitter },
+    { href: social?.linkedin, label: 'LinkedIn', icon: LuLinkedin },
+    { href: social?.twitter, label: 'Twitter', icon: LuTwitter },
   ].filter((l) => l.href);
 
   return (
@@ -29,7 +29,9 @@ export default function TeamCard({ name, position, bio, imageUrl, social }: Team
         )}
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-textLight">{position}</p>
+        <p className="mb-1 text-xs font-semibold tracking-[0.14em] text-textLight uppercase">
+          {position}
+        </p>
         <h3 className="font-heading text-lg font-bold tracking-tight text-text">{name}</h3>
         <span className="my-4 h-0.5 w-8 bg-secondary" aria-hidden="true" />
         <p className="flex-1 text-sm leading-relaxed text-textLight">{bio}</p>
