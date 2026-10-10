@@ -68,6 +68,17 @@ export const stats = pgTable('stats', {
   sortOrder: integer().notNull().default(0),
 });
 
+export const teamMembers = pgTable('team_members', {
+  id: uuid().primaryKey().defaultRandom(),
+  name: text().notNull(),
+  position: text().notNull(),
+  bio: text().notNull(),
+  photo: text(),
+  linkedin: text(),
+  twitter: text(),
+  sortOrder: integer().notNull().default(0),
+});
+
 export const submissions = pgTable('submissions', {
   id: uuid().primaryKey().defaultRandom(),
   formType: formType().notNull(),
@@ -88,6 +99,7 @@ export const rateLimits = pgTable('rate_limits', {
 export type Story = typeof stories.$inferSelect;
 export type Program = typeof programs.$inferSelect;
 export type Stat = typeof stats.$inferSelect;
+export type TeamMember = typeof teamMembers.$inferSelect;
 export type Submission = typeof submissions.$inferSelect;
 export type User = typeof users.$inferSelect;
 export type UserRole = (typeof userRole.enumValues)[number];

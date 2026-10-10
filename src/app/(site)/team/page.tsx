@@ -3,9 +3,11 @@ import SectionTitle from '@/components/SectionTitle';
 import TeamCard from '@/components/TeamCard';
 import CtaBlock from '@/components/CtaBlock';
 import Reveal from '@/components/Reveal';
-import { teamMembers } from '@/data/site';
+import { getTeamMembers } from '@/lib/content';
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const members = await getTeamMembers();
+
   return (
     <>
       <PageHeader
@@ -14,20 +16,22 @@ export default function TeamPage() {
         description="Meet the passionate individuals driving Aarambha's mission forward every day."
       />
 
-      <section className="bg-muted py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal>
-            <SectionTitle label="Leadership" title="The people behind Aarambha" />
-          </Reveal>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map((member, i) => (
-              <Reveal key={member.name} index={i}>
-                <TeamCard {...member} />
-              </Reveal>
-            ))}
+      {members.length > 0 && (
+        <section className="bg-muted py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-6">
+            <Reveal>
+              <SectionTitle label="Leadership" title="The people behind Aarambha" />
+            </Reveal>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {members.map((member, i) => (
+                <Reveal key={member.id} index={i}>
+                  <TeamCard member={member} />
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <CtaBlock
         title="Join Our Team"

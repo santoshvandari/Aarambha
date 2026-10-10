@@ -1,9 +1,11 @@
 import './load-env.ts';
+import { randomUUID } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 import { sql as raw } from 'drizzle-orm';
 import type { PgTable } from 'drizzle-orm/pg-core';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import { programs, stats, stories } from '../src/db/schema.ts';
+import { programs, stats, stories, teamMembers } from '../src/db/schema.ts';
 
 // Loads the starter content; each table is only filled when it is empty, so re-running is safe
 const sql = postgres(process.env.DATABASE_URL ?? '', { max: 1 });
@@ -120,6 +122,54 @@ const storyRows: (typeof stories.$inferInsert)[] = [
   },
 ];
 
+// Placeholder portraits live in scripts/seed-images and are uploaded to the bucket on seed
+const teamRows = [
+  {
+    name: 'Rajesh Sharma',
+    position: 'President & Founder',
+    bio: 'A passionate social entrepreneur who founded Aarambha with a vision to empower underserved communities through education and collective action.',
+    image: 'team-1.png',
+  },
+  {
+    name: 'Priya Adhikari',
+    position: 'Vice President',
+    bio: 'With a background in community development, Priya oversees program strategy and ensures our initiatives create measurable impact on the ground.',
+    image: 'team-2.png',
+  },
+  {
+    name: 'Sunil Thapa',
+    position: 'Program Director',
+    bio: 'Sunil brings over a decade of experience in project management and nonprofit operations, leading our flagship education and outreach programs.',
+    image: 'team-3.png',
+  },
+  {
+    name: 'Anisha Karki',
+    position: 'Communications Lead',
+    bio: 'A skilled communicator and storyteller, Anisha manages our brand presence, partnerships, and community engagement across all platforms.',
+    image: 'team-4.png',
+  },
+];
+
+async function seedTeam() {
+  // Loaded only here, so seeding the other tables works without storage configured
+  const { deleteObject, initializeBucket, uploadObject } = await import('../src/lib/storage.ts');
+  await initializeBucket();
+  const rows = [];
+  try {
+    for (const [i, { image, ...member }] of teamRows.entries()) {
+      const photo = `team/${randomUUID()}.png`;
+      const file = await readFile(new URL(`./seed-images/${image}`, import.meta.url));
+      await uploadObject(photo, new Uint8Array(file), 'image/png');
+      rows.push({ ...member, photo, sortOrder: i });
+    }
+    await db.insert(teamMembers).values(rows);
+  } catch (error) {
+    // Don't leave uploaded photos behind when the rows could not be saved
+    await Promise.allSettled(rows.map((row) => deleteObject(row.photo)));
+    throw error;
+  }
+}
+
 async function isEmpty(table: PgTable) {
   const [row] = await db
     .select({ one: raw`1` })
@@ -133,6 +183,7 @@ try {
     await db.insert(programs).values(programRows.map((row, i) => ({ ...row, sortOrder: i })));
   if (await isEmpty(stats)) await db.insert(stats).values(statRows);
   if (await isEmpty(stories)) await db.insert(stories).values(storyRows);
+  if (await isEmpty(teamMembers)) await seedTeam();
   console.info('[seed] Done. Tables that already had data were left unchanged.');
 } finally {
   await sql.end();

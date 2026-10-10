@@ -8,7 +8,7 @@ import { db } from '@/db';
 import { users, type UserRole } from '@/db/schema';
 import { requireAdmin, revokeSessions } from '@/lib/auth';
 import { accessEmail, sendEmail } from '@/lib/email';
-import { text, type FormState } from '@/lib/forms';
+import { isUuid, text, type FormState } from '@/lib/forms';
 import { generateTemporaryPassword, hashPassword } from '@/lib/password';
 import { isRateLimited } from '@/lib/rate-limit';
 
@@ -82,6 +82,7 @@ export async function updateUser(
   formData: FormData
 ): Promise<FormState> {
   const me = await requireAdmin();
+  if (!isUuid(id)) return { error: 'This user no longer exists.' };
   const [target] = await db.select().from(users).where(eq(users.id, id));
   if (!target) return { error: 'This user no longer exists.' };
 
@@ -107,6 +108,7 @@ export async function updateUser(
 export async function resetUserPassword(id: string): Promise<FormState> {
   const me = await requireAdmin();
   if (id === me.id) return { error: 'Use Change password to update your own password.' };
+  if (!isUuid(id)) return { error: 'This user no longer exists.' };
 
   const [target] = await db.select().from(users).where(eq(users.id, id));
   if (!target) return { error: 'This user no longer exists.' };
@@ -123,7 +125,7 @@ export async function resetUserPassword(id: string): Promise<FormState> {
 
 export async function deleteUser(id: string) {
   const me = await requireAdmin();
-  if (id === me.id) return;
+  if (id === me.id || !isUuid(id)) return;
 
   const [target] = await db.select().from(users).where(eq(users.id, id));
   if (!target || (target.role === 'admin' && (await adminCount()) <= 1)) return;

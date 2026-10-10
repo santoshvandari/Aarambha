@@ -1,29 +1,24 @@
 import Image from 'next/image';
 import { LuLinkedin, LuTwitter } from 'react-icons/lu';
+import type { TeamMember } from '@/db/schema';
+import { publicUrl } from '@/lib/storage';
 
-interface TeamCardProps {
-  name: string;
-  position: string;
-  bio: string;
-  imageUrl?: string;
-  social?: { linkedin?: string; twitter?: string };
-}
-
-export default function TeamCard({ name, position, bio, imageUrl, social }: TeamCardProps) {
+export default function TeamCard({ member }: { member: TeamMember }) {
+  const { name, position, bio, photo } = member;
   const links = [
-    { href: social?.linkedin, label: 'LinkedIn', icon: LuLinkedin },
-    { href: social?.twitter, label: 'Twitter', icon: LuTwitter },
+    { href: member.linkedin, label: 'LinkedIn', icon: LuLinkedin },
+    { href: member.twitter, label: 'Twitter', icon: LuTwitter },
   ].filter((l) => l.href);
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface shadow-sm transition-all duration-200 hover:border-slate-400 hover:shadow-md dark:hover:border-slate-600">
       <div className="relative aspect-4/5 overflow-hidden border-b border-border bg-muted">
-        {imageUrl && (
+        {photo && (
           <Image
-            src={imageUrl}
+            src={publicUrl(photo)}
             alt={`Portrait of ${name}`}
             fill
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            unoptimized
             className="object-cover grayscale-[35%] transition duration-300 group-hover:grayscale-0"
           />
         )}
@@ -40,7 +35,9 @@ export default function TeamCard({ name, position, bio, imageUrl, social }: Team
             {links.map(({ href, label, icon: Icon }) => (
               <a
                 key={label}
-                href={href}
+                href={href ?? undefined}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={`${name} on ${label}`}
                 className="flex h-9 w-9 items-center justify-center rounded-md border border-border text-textLight transition-colors hover:border-text hover:text-text"
               >

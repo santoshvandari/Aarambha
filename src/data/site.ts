@@ -92,34 +92,3 @@ export const milestones = [
     description: 'Aarambha was established by a group of 12 passionate youth in Jhapa.',
   },
 ];
-
-export const teamMembers = [
-  {
-    name: 'Rajesh Sharma',
-    position: 'President & Founder',
-    bio: 'A passionate social entrepreneur who founded Aarambha with a vision to empower underserved communities through education and collective action.',
-    imageUrl: '/team-1.png',
-    social: { linkedin: '#', twitter: '#' },
-  },
-  {
-    name: 'Priya Adhikari',
-    position: 'Vice President',
-    bio: 'With a background in community development, Priya oversees program strategy and ensures our initiatives create measurable impact on the ground.',
-    imageUrl: '/team-2.png',
-    social: { linkedin: '#', twitter: '#' },
-  },
-  {
-    name: 'Sunil Thapa',
-    position: 'Program Director',
-    bio: 'Sunil brings over a decade of experience in project management and nonprofit operations, leading our flagship education and outreach programs.',
-    imageUrl: '/team-3.png',
-    social: { linkedin: '#', twitter: '#' },
-  },
-  {
-    name: 'Anisha Karki',
-    position: 'Communications Lead',
-    bio: 'A skilled communicator and storyteller, Anisha manages our brand presence, partnerships, and community engagement across all platforms.',
-    imageUrl: '/team-4.png',
-    social: { linkedin: '#', twitter: '#' },
-  },
-];
