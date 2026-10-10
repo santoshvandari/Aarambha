@@ -10,9 +10,9 @@ export default async function PanelLayout({ children }: { children: ReactNode })
   const user = await requireUser();
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <header className="border-b border-border bg-surface dark:bg-background">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
           <Logo />
           <div className="flex items-center gap-3">
             <Link
@@ -32,9 +32,13 @@ export default async function PanelLayout({ children }: { children: ReactNode })
             </form>
           </div>
         </div>
-        <AdminNav isAdmin={user.role === 'admin'} />
       </header>
-      <main>{children}</main>
-    </>
+      <div className="flex flex-1 flex-col lg:flex-row">
+        <aside className="border-b border-border bg-surface lg:sticky lg:top-0 lg:max-h-screen lg:w-60 lg:shrink-0 lg:overflow-y-auto lg:border-r lg:border-b-0 dark:bg-background">
+          <AdminNav isAdmin={user.role === 'admin'} />
+        </aside>
+        <main className="min-w-0 flex-1">{children}</main>
+      </div>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import { db } from '@/db';
 import { programs } from '@/db/schema';
 import { requireUser } from '@/lib/auth';
-import { checked, text, type FormState } from '@/lib/forms';
+import { SORT_ORDER_ERROR, checked, isUuid, sortOrder, text, type FormState } from '@/lib/forms';
 import { programIcons } from '@/lib/icons';
 import { slugify } from '@/lib/slug';
 
@@ -16,6 +16,9 @@ export async function saveProgram(
   formData: FormData
 ): Promise<FormState> {
   await requireUser();
+  if (id && !isUuid(id)) return { error: 'This program no longer exists.' };
+  const order = sortOrder(formData);
+  if (order === null) return { error: SORT_ORDER_ERROR };
   const title = text(formData, 'title');
   const values = {
     title,
@@ -25,7 +28,7 @@ export async function saveProgram(
     icon: text(formData, 'icon'),
     status: text(formData, 'status') === 'upcoming' ? ('upcoming' as const) : ('active' as const),
     featured: checked(formData, 'featured'),
-    sortOrder: Number(text(formData, 'sortOrder')) || 0,
+    sortOrder: order,
   };
 
   if (!values.title || !values.summary || !values.description) {
@@ -51,6 +54,7 @@ export async function saveProgram(
 
 export async function deleteProgram(id: string) {
   await requireUser();
+  if (!isUuid(id)) return;
   await db.delete(programs).where(eq(programs.id, id));
   revalidatePath('/admin/programs');
   redirect('/admin/programs');

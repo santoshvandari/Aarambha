@@ -10,7 +10,7 @@ Built with Next.js (App Router), TypeScript, Tailwind CSS v4, Drizzle ORM on Pos
 npm install
 cp .env.example .env.local   # fill in the database and storage values
 npm run db:migrate           # create the tables
-npm run db:seed              # starter programs, impact numbers and sample updates
+npm run db:seed              # starter programs, impact numbers, sample updates and team
 npm run admin:create         # your first admin account
 npm run dev
 ```
@@ -35,15 +35,17 @@ Full setup and deployment notes: **[docs/setup.md](docs/setup.md)**.
 
 ## Admin
 
-Sign in at `/login`. Admins manage everything; editors manage content and the inbox but not users.
+Sign in at `/login`. Admins manage everything; editors manage content and the inbox but not the team or users.
 
 - **Inbox**: contact form messages (volunteer, membership, general).
 - **Updates**: articles with a cover image and inline photos, drafted and published from the admin.
 - **Programs** and **Impact**: what the Programs page and the impact numbers show.
+- **Team** (admins only): members with a portrait, bio and optional LinkedIn and X links.
 - **Users** (admins only): add people (they get a temporary password by email), edit roles, reset passwords.
 
 Safety rules: you cannot change your own email or role, or delete yourself, and the last admin can never be removed or demoted.
 Sign-in, password changes, uploads, account creation and the contact form are rate limited.
+In production, each server start deletes uploaded images older than 24 hours that no update or team member uses (replaced or abandoned uploads, images removed from articles).
 
 ## Project structure
 
@@ -55,9 +57,9 @@ src/
   components/     shared UI; components/admin holds the admin forms and editor
   db/             Drizzle schema and connection
   lib/            auth, storage, rate limits, spam checks, email, content queries
-  data/site.ts    copy that rarely changes: contact details, values, team
+  data/site.ts    copy that rarely changes: contact details, values, milestones
 drizzle/          SQL migrations
-scripts/          seed and admin CLI
+scripts/          seed (with placeholder team photos) and admin CLI
 docs/             setup guide
 ```
 

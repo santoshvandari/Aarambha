@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1149.0",
+    "@fontsource-variable/montserrat": "5.3.0",
+    "@fontsource-variable/open-sans": "5.3.0",
     "@smithy/node-http-handler": "^4.12.1",
     "@tiptap/extension-image": "^3.31.4",
     "@tiptap/pm": "^3.31.4",

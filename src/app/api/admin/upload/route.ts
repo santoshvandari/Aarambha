@@ -10,7 +10,7 @@ const EXTENSIONS: Record<string, string> = {
   'image/webp': 'webp',
 };
 
-// Stores one image for a field update (cover or inline) and returns its public URL
+// Stores one image (update cover or inline photo, or a team portrait) and returns its public URL
 export async function POST(request: Request) {
   const user = await getCurrentUser();
   if (!user || user.mustChangePassword)
@@ -22,7 +22,12 @@ export async function POST(request: Request) {
     );
   }
 
-  const file = (await request.formData()).get('file');
+  const form = await request.formData();
+  const folder = form.get('folder') === 'team' ? 'team' : 'stories';
+  if (folder === 'team' && user.role !== 'admin')
+    return Response.json({ error: 'Only admins can change the team.' }, { status: 403 });
+
+  const file = form.get('file');
   if (!(file instanceof File))
     return Response.json({ error: 'No image was sent.' }, { status: 400 });
 
@@ -31,7 +36,7 @@ export async function POST(request: Request) {
   if (file.size > MAX_BYTES)
     return Response.json({ error: 'Images must be 5 MB or smaller.' }, { status: 400 });
 
-  const key = `stories/${randomUUID()}.${extension}`;
+  const key = `${folder}/${randomUUID()}.${extension}`;
   try {
     await uploadObject(key, new Uint8Array(await file.arrayBuffer()), file.type);
   } catch (error) {

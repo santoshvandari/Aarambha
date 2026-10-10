@@ -6,23 +6,13 @@ import { redirect } from 'next/navigation';
 import { db } from '@/db';
 import { stories } from '@/db/schema';
 import { requireUser } from '@/lib/auth';
-import { checked, text, type FormState } from '@/lib/forms';
+import { checked, isUuid, text, type FormState } from '@/lib/forms';
 import { sanitizeArticle } from '@/lib/sanitize';
 import { slugify } from '@/lib/slug';
-import { deleteObject } from '@/lib/storage';
+import { removeImage } from '@/lib/storage';
 
 const COVER_KEY = /^stories\/[0-9a-f-]{36}\.(jpg|png|webp)$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
-
-// Storage clean-up is best effort; a leftover image must never block saving the update
-async function removeImage(key: string | null) {
-  if (!key) return;
-  try {
-    await deleteObject(key);
-  } catch (error) {
-    console.error(`[Updates] Could not delete image ${key}:`, error);
-  }
-}
 
 export async function saveStory(
   id: string | null,
@@ -30,6 +20,7 @@ export async function saveStory(
   formData: FormData
 ): Promise<FormState> {
   await requireUser();
+  if (id && !isUuid(id)) return { error: 'This update no longer exists.' };
   const title = text(formData, 'title');
   const cover = text(formData, 'coverImage');
   const body = sanitizeArticle(text(formData, 'body'));
@@ -78,6 +69,7 @@ export async function saveStory(
 
 export async function deleteStory(id: string) {
   await requireUser();
+  if (!isUuid(id)) return;
   const [story] = await db
     .delete(stories)
     .where(eq(stories.id, id))

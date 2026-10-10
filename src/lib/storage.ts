@@ -127,4 +127,14 @@ async function deleteObject(key: string) {
   await s3Client.send(new DeleteObjectCommand({ Bucket: config.bucketName, Key: key }));
 }
 
-export { s3Client, config, initializeBucket, publicUrl, uploadObject, deleteObject };
+// Clean-up is best effort; a leftover image must never block saving content
+async function removeImage(key: string | null) {
+  if (!key) return;
+  try {
+    await deleteObject(key);
+  } catch (error) {
+    console.error(`[Storage] Could not delete image ${key}:`, error);
+  }
+}
+
+export { s3Client, config, initializeBucket, publicUrl, uploadObject, deleteObject, removeImage };

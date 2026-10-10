@@ -1,7 +1,7 @@
 import { connection } from 'next/server';
 import { and, asc, desc, eq } from 'drizzle-orm';
 import { db } from '@/db';
-import { programs, stats, stories } from '@/db/schema';
+import { programs, stats, stories, teamMembers } from '@/db/schema';
 
 // Every read waits for a request, so pages using these are rendered fresh and builds never touch the database
 
@@ -17,6 +17,11 @@ export async function getStats(placement: 'home' | 'programs') {
     .from(stats)
     .where(eq(stats.placement, placement))
     .orderBy(asc(stats.sortOrder));
+}
+
+export async function getTeamMembers() {
+  await connection();
+  return db.select().from(teamMembers).orderBy(asc(teamMembers.sortOrder), asc(teamMembers.name));
 }
 
 export async function getPublishedStories(limit?: number) {

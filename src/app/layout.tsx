@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { Montserrat, Open_Sans } from 'next/font/google';
+import localFont from 'next/font/local';
 import { ThemeProvider } from 'next-themes';
 import './globals.css';
 
-const montserrat = Montserrat({
+// Bundled from npm instead of fetched from Google, so dev and builds never depend on fonts.googleapis.com
+const montserrat = localFont({
+  src: '../../node_modules/@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2',
   variable: '--font-montserrat',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: '100 900',
   display: 'swap',
 });
 
-const openSans = Open_Sans({
+const openSans = localFont({
+  src: '../../node_modules/@fontsource-variable/open-sans/files/open-sans-latin-wght-normal.woff2',
   variable: '--font-open-sans',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: '300 800',
   display: 'swap',
 });
 
