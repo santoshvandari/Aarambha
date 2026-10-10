@@ -1,25 +1,15 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-/**
- * Reusable Card component.
- * Glass effect in dark mode, soft shadow in light mode.
- * Gradient accent border on hover.
- */
 interface CardProps extends ComponentPropsWithoutRef<"div"> {
   hover?: boolean;
 }
 
-export default function Card({
-  children,
-  className = "",
-  hover = true,
-  ...props
-}: CardProps) {
+export default function Card({ children, className = "", hover = true, ...props }: CardProps) {
   return (
     <div
-      className={`group/card relative rounded-xl border border-border p-6 overflow-hidden bg-surface shadow-sm ${
+      className={`rounded-lg border border-border bg-surface p-6 shadow-sm ${
         hover
-          ? "transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+          ? "transition-all duration-200 hover:border-slate-400 hover:shadow-md dark:hover:border-slate-600"
           : ""
       } ${className}`}
       {...props}

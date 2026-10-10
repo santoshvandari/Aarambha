@@ -1,9 +1,6 @@
 import type { ReactNode } from "react";
 
-/**
- * Section title with pill badge label and optional subtitle.
- */
-type Align = "center" | "left" | "right";
+type Align = "left" | "center";
 
 interface SectionTitleProps {
   title: ReactNode;
@@ -17,30 +14,24 @@ export default function SectionTitle({
   title,
   subtitle,
   label,
-  align = "center",
+  align = "left",
   className = "",
 }: SectionTitleProps) {
-  const alignClasses: Record<Align, string> = {
-    center: "text-center items-center",
-    left: "text-left items-start",
-    right: "text-right items-end",
-  };
+  const centered = align === "center";
 
   return (
-    <div className={`mb-14 flex flex-col ${alignClasses[align]} ${className}`}>
-      {/* Pill badge — only shown when label explicitly provided */}
+    <div className={`mb-12 flex flex-col ${centered ? "items-center text-center" : "items-start"} ${className}`}>
       {label && (
-        <span className="mb-4 inline-flex items-center rounded-full bg-secondary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-secondary">
+        <span className="mb-4 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-text">
+          <span className="h-0.5 w-8 bg-secondary" aria-hidden="true" />
           {label}
         </span>
       )}
-      <h2 className="text-3xl sm:text-4xl font-heading font-bold text-text leading-tight tracking-tight">
+      <h2 className="font-heading text-3xl font-bold leading-tight tracking-tight text-text sm:text-4xl">
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-4 max-w-2xl text-textLight text-lg leading-relaxed ${
-          align === "center" ? "mx-auto" : ""
-        }`}>
+        <p className={`mt-4 max-w-2xl text-lg leading-relaxed text-textLight ${centered ? "mx-auto" : ""}`}>
           {subtitle}
         </p>
       )}

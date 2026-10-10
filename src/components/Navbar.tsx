@@ -3,143 +3,94 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LuMenu, LuX } from "react-icons/lu";
+import { navLinks } from "@/data/site";
+import Logo from "./Logo";
+import Button from "./Button";
 import ThemeToggle from "./ThemeToggle";
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/programs", label: "Programs" },
-  { href: "/team", label: "Team" },
-  { href: "/contact", label: "Contact" },
-];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- close the drawer after client-side navigation
+  useEffect(() => setMobileOpen(false), [pathname]);
+
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 bg-background/95 border-b ${
-        scrolled
-          ? "border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
-          : "border-border/30"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        {/* Logo with accent mark */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-white font-heading font-bold text-lg shadow-sm transition-transform duration-200 group-hover:scale-105">
-            A
-          </div>
-          <span className="text-xl font-heading font-bold text-text transition-colors group-hover:text-secondary tracking-tight">
-            Aarambha
-          </span>
-        </Link>
+    <header className="sticky top-0 z-50 border-b border-border bg-surface dark:bg-background">
+      <nav className="mx-auto flex h-18 max-w-6xl items-center justify-between px-6" aria-label="Main">
+        <Logo />
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-1">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`relative px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? "text-secondary bg-secondary/8"
-                      : "text-textLight hover:text-text hover:bg-surface/80"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
+        <ul className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
+                className={`relative py-6 text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:transition-colors ${
+                  isActive(link.href)
+                    ? "text-text after:bg-secondary"
+                    : "text-textLight after:bg-transparent hover:text-text"
+                }`}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
-        {/* Right side: Theme toggle + CTA */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-secondary/90 hover:shadow-md hover:-translate-y-0.5"
-          >
+          <Button href="/contact" size="sm">
             Get Involved
-          </Link>
+          </Button>
         </div>
 
-        {/* Mobile: toggle + hamburger */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-lg text-text hover:bg-surface transition-colors"
-            aria-label="Toggle menu"
+            type="button"
+            onClick={() => setMobileOpen((open) => !open)}
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-border text-text"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
-            <div className="flex flex-col gap-1.5">
-              <span
-                className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
-                  mobileOpen ? "translate-y-2 rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-6 bg-current transition-all duration-300 ${
-                  mobileOpen ? "opacity-0 scale-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
-                  mobileOpen ? "-translate-y-2 -rotate-45" : ""
-                }`}
-              />
-            </div>
+            {mobileOpen ? <LuX className="h-5 w-5" /> : <LuMenu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t bg-background/95 ${
-          mobileOpen ? "max-h-112 pb-6 border-border/50" : "max-h-0 border-transparent"
-        }`}
-      >
-        <ul className="flex flex-col gap-1 px-6 pt-4">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <li key={link.href}>
+      {mobileOpen && (
+        <div id="mobile-menu" className="border-t border-border bg-surface md:hidden dark:bg-background">
+          <ul className="mx-auto flex max-w-6xl flex-col px-6 py-4">
+            {navLinks.map((link) => (
+              <li key={link.href} className="border-b border-border last:border-b-0">
                 <Link
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
-                    isActive
-                      ? "bg-secondary/10 text-secondary"
-                      : "text-textLight hover:bg-surface hover:text-text"
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={`flex items-center gap-3 py-3.5 text-base font-semibold ${
+                    isActive(link.href) ? "text-text" : "text-textLight"
                   }`}
                 >
+                  <span
+                    className={`h-4 w-0.5 ${isActive(link.href) ? "bg-secondary" : "bg-transparent"}`}
+                    aria-hidden="true"
+                  />
                   {link.label}
                 </Link>
               </li>
-            );
-          })}
-          <li className="pt-2">
-            <Link
-              href="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="block rounded-lg bg-secondary px-4 py-3 text-center text-sm font-semibold text-white shadow-sm"
-            >
+            ))}
+          </ul>
+          <div className="mx-auto max-w-6xl px-6 pb-6">
+            <Button href="/contact" className="w-full">
               Get Involved
-            </Link>
-          </li>
-        </ul>
-      </div>
+            </Button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
