@@ -1,203 +1,105 @@
-"use client";
+'use client';
 
-import {useRef, type MouseEvent} from "react";
-import {useEffect, useState} from "react";
-import Button from "./Button";
-import {LuMoveRight, LuSparkles} from "react-icons/lu";
-import {motion, type Variants} from "framer-motion";
-import Image from "next/image";
-import {useTheme} from "next-themes";
+import { motion, type Variants } from 'framer-motion';
+import { LuMoveRight } from 'react-icons/lu';
+import { site } from '@/data/site';
+import type { Program } from '@/db/schema';
+import Button from './Button';
+import Ridgeline from './Ridgeline';
 
 interface HeroProps {
-  title?: string;
-  tagline?: string;
-  description?: string;
-  ctaText?: string;
-  ctaHref?: string;
-  secondaryCtaText?: string;
-  secondaryCtaHref?: string;
-  backgroundImage?: string;
+  focusAreas: Pick<Program, 'slug' | 'title' | 'summary'>[];
 }
 
-export default function Hero({
-  title = "Aarambha",
-  tagline = "Where Change Begins",
-  description = "We are a community of passionate individuals working together to create meaningful, lasting impact in our society.",
-  ctaText = "Get Involved",
-  ctaHref = "/contact",
-  secondaryCtaText = "Learn More",
-  secondaryCtaHref = "/about",
-  backgroundImage = "/hero-bg.png",
-}: HeroProps) {
-  const {theme} = useTheme();
-  const [mounted, setMounted] = useState(false);
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration guard for theme-aware rendering
-    setMounted(true);
-  }, []);
+const item: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
 
-  const isDark = mounted && theme === "dark";
-
-  const btnRef = useRef<HTMLAnchorElement>(null);
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const btn = btnRef.current;
-    if (!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    btn.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
-  };
-
-  const handleMouseLeave = () => {
-    const btn = btnRef.current;
-    if (btn) btn.style.transform = "translate(0px, 0px)";
-  };
-
-  const container: Variants = {
-    hidden: {},
-    show: {transition: {staggerChildren: 0.1, delayChildren: 0.05}},
-  };
-  const item: Variants = {
-    hidden: {opacity: 0, y: 24},
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94]},
-    },
-  };
-
+export default function Hero({ focusAreas }: HeroProps) {
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-background text-text py-28 border-b border-border">
-      {isDark ? (
-        <div className="absolute inset-0">
-          <Image
-            src={backgroundImage}
-            alt="Aarambha community volunteers"
-            fill
-            className="object-cover opacity-100"
-            priority
-          />
-          <div className="absolute inset-0 bg-heroDark/70" />
-          <div
-            className="absolute inset-0 opacity-[0.035] pointer-events-none"
-            style={{
-              backgroundImage:
-                "radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
-      ) : (
-        <div className="absolute inset-0 bg-background">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(13,148,136,0.12),transparent_55%)]" />
-        </div>
-      )}
-
-      {/* Content */}
+    <section className="relative overflow-hidden border-b border-heroBorder bg-hero text-heroText">
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 mx-auto max-w-6xl w-full px-6"
+        className="relative mx-auto grid max-w-6xl gap-14 px-6 pt-20 pb-36 sm:pt-24 sm:pb-48 lg:grid-cols-[1.35fr_1fr] lg:items-center"
       >
-        <div className="mx-auto max-w-3xl text-center">
-          {/* Badge */}
-          <motion.div
+        <div>
+          <motion.p
             variants={item}
-            className="mb-6 inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-medium text-text border border-border"
+            className="mb-6 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.16em] text-heroMuted uppercase"
           >
-            <LuSparkles className="h-3.5 w-3.5 text-accent" />
-            Nonprofit Social Club
-          </motion.div>
+            <span className="h-0.5 w-8 bg-accent" aria-hidden="true" />
+            Nonprofit Social Club · {site.city}
+          </motion.p>
 
-          {/* Title */}
           <motion.h1
             variants={item}
-            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-text leading-[1.1] tracking-tight"
+            className="font-heading text-5xl leading-[1.05] font-extrabold tracking-tight sm:text-6xl lg:text-7xl"
           >
-            {title}
+            {site.name}
           </motion.h1>
 
-          {/* Tagline — clean secondary color, not gradient */}
           <motion.p
             variants={item}
-            className="mt-3 text-2xl sm:text-3xl font-heading font-semibold text-secondary tracking-tight"
+            className="mt-3 font-heading text-2xl font-semibold tracking-tight text-secondaryText sm:text-3xl"
           >
-            {tagline}
+            {site.tagline}
           </motion.p>
 
-          {/* Description */}
           <motion.p
             variants={item}
-            className="mt-6 text-base sm:text-lg text-textLight leading-relaxed max-w-2xl mx-auto"
+            className="mt-6 max-w-xl text-lg leading-relaxed text-heroMuted"
           >
-            {description}
+            We are a community of passionate individuals working together to create meaningful,
+            lasting impact in our society.
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            variants={item}
-            className="mt-8 flex flex-wrap items-center justify-center gap-4"
-          >
-            <div
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              className="inline-block"
-            >
-              <Button
-                ref={btnRef}
-                href={ctaHref}
-                variant="primary"
-                size="lg"
-                className="transition-transform duration-200 ease-out shadow-lg shadow-secondary/20"
-              >
-                {ctaText}
-                <LuMoveRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
-            <Button
-              href={secondaryCtaHref}
-              variant="ghost"
-              size="lg"
-              className="border border-border text-text hover:bg-muted hover:border-border"
-            >
-              {secondaryCtaText}
+          <motion.div variants={item} className="mt-10 flex flex-wrap gap-4">
+            <Button href="/contact" size="lg">
+              Get Involved
+              <LuMoveRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
+            <Button href="/about" variant="outline" size="lg" className="bg-heroPanel">
+              Learn More
             </Button>
           </motion.div>
+        </div>
 
-          {/* Stats */}
+        {focusAreas.length > 0 && (
           <motion.div
             variants={item}
-            className="mt-16 flex items-center justify-center gap-8 sm:gap-12"
+            className="rounded-lg border border-heroBorder bg-heroPanel p-6 shadow-sm sm:p-8"
           >
-            {[
-              {value: "500+", label: "Volunteers"},
-              {value: "50+", label: "Programs"},
-              {value: "10K+", label: "Lives Impacted"},
-            ].map((stat, i) => (
-              <div
-                key={stat.label}
-                className="flex items-center gap-8 sm:gap-12"
-              >
-                {i > 0 && (
-                  <div className="h-8 w-px bg-border -ml-4 sm:-ml-6" />
-                )}
-                <div>
-                  <p className="text-2xl sm:text-3xl font-heading font-bold text-text tracking-tight">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-xs text-textLight uppercase tracking-wider">
-                    {stat.label}
-                  </p>
-                </div>
-              </div>
-            ))}
+            <p className="text-xs font-semibold tracking-[0.16em] text-heroMuted uppercase">
+              Where we focus
+            </p>
+            <ol className="mt-4">
+              {focusAreas.map((program, i) => (
+                <li
+                  key={program.slug}
+                  className="flex gap-5 border-b border-heroBorder py-5 last:border-b-0 last:pb-0"
+                >
+                  <span className="font-heading text-sm font-bold text-accentText">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p className="font-heading font-semibold">{program.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-heroMuted">{program.summary}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </motion.div>
-        </div>
+        )}
       </motion.div>
-
+      <Ridgeline />
     </section>
   );
 }

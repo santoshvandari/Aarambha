@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, format and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    # The build only checks that these exist; it never connects to the database or storage
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+      OBJECT_STORAGE_ENDPOINT: http://localhost:9000
+      OBJECT_STORAGE_ACCESS_KEY: ci
+      OBJECT_STORAGE_SECRET_KEY: ci
+      NEXT_TELEMETRY_DISABLED: 1
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint:check
+
+      - name: Format
+        run: npm run format:check
+
+      - name: Build
+        run: npm run build

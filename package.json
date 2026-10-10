@@ -2,29 +2,49 @@
   "name": "aarambha",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint:check": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "node scripts/seed.ts",
+    "db:studio": "drizzle-kit studio",
+    "admin:create": "node scripts/create-admin.ts"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
+    "@aws-sdk/client-s3": "^3.1149.0",
+    "@smithy/node-http-handler": "^4.12.1",
+    "@tiptap/extension-image": "^3.31.4",
+    "@tiptap/pm": "^3.31.4",
+    "@tiptap/react": "^3.31.4",
+    "@tiptap/starter-kit": "^3.31.4",
+    "drizzle-orm": "^0.45.4",
     "framer-motion": "^12.34.3",
     "next": "16.1.6",
     "next-themes": "^0.4.6",
+    "postgres": "^3.4.9",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
-    "tailwind-merge": "^3.5.0"
+    "sanitize-html": "^2.18.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^25.2.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.3.0",
+    "@types/sanitize-html": "^2.16.2",
+    "drizzle-kit": "^0.31.11",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
     "typescript": "^6.0.3"
   }

@@ -1,9 +1,9 @@
-import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef, ReactNode, Ref } from "react";
-import Link from "next/link";
+import { forwardRef } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
+import Link from 'next/link';
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonVariant = 'primary' | 'outline';
+type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface BaseButtonProps {
   children?: ReactNode;
@@ -13,7 +13,7 @@ interface BaseButtonProps {
 }
 
 type ButtonAsButton = BaseButtonProps &
-  Omit<ComponentPropsWithoutRef<"button">, keyof BaseButtonProps> & {
+  Omit<ComponentPropsWithoutRef<'button'>, keyof BaseButtonProps> & {
     href?: undefined;
   };
 
@@ -22,54 +22,41 @@ type ButtonAsLink = BaseButtonProps &
 
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
-/**
- * Reusable Button component.
- *
- * @param variant – "primary" | "secondary" | "outline" | "ghost"
- * @param href    – If provided, renders as <Link>
- * @param size    – "sm" | "md" | "lg"
- */
-const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-  function Button(
-    { children, variant = "primary", size = "md", className = "", ...props },
-    ref
-  ) {
-    const base =
-      "group inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background";
+const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(function Button(
+  { children, variant = 'primary', size = 'md', className = '', ...props },
+  ref
+) {
+  const base =
+    'inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60';
 
-    const variants: Record<ButtonVariant, string> = {
-      primary:
-        "bg-secondary text-white shadow-sm hover:bg-secondary/90 hover:shadow-md focus:ring-secondary",
-      secondary:
-        "bg-accent text-white shadow-sm hover:bg-accent/90 hover:shadow-md focus:ring-accent",
-      outline:
-        "border border-secondary/30 text-secondary hover:bg-secondary hover:text-white hover:border-secondary focus:ring-secondary",
-      ghost:
-        "text-textLight hover:bg-surface hover:text-text focus:ring-secondary shadow-none hover:shadow-none",
-    };
+  const variants: Record<ButtonVariant, string> = {
+    primary:
+      'bg-primary text-white hover:bg-slate-700 dark:bg-text dark:text-background dark:hover:bg-slate-300',
+    outline:
+      'border border-slate-400 text-text hover:border-text hover:bg-text hover:text-background dark:border-slate-500',
+  };
 
-    const sizes: Record<ButtonSize, string> = {
-      sm: "px-4 py-2 text-sm",
-      md: "px-6 py-3 text-sm",
-      lg: "px-8 py-4 text-base",
-    };
+  const sizes: Record<ButtonSize, string> = {
+    sm: 'px-4 py-2 text-sm',
+    md: 'px-5 py-2.5 text-sm',
+    lg: 'px-7 py-3.5 text-base',
+  };
 
-    const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
 
-    if (props.href !== undefined) {
-      return (
-        <Link ref={ref as Ref<HTMLAnchorElement>} className={classes} {...props}>
-          {children}
-        </Link>
-      );
-    }
-
+  if (props.href !== undefined) {
     return (
-      <button ref={ref as Ref<HTMLButtonElement>} className={classes} {...props}>
+      <Link ref={ref as Ref<HTMLAnchorElement>} className={classes} {...props}>
         {children}
-      </button>
+      </Link>
     );
   }
-);
+
+  return (
+    <button ref={ref as Ref<HTMLButtonElement>} className={classes} {...props}>
+      {children}
+    </button>
+  );
+});
 
 export default Button;
