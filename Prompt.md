@@ -1,181 +1,57 @@
-Create a fully frontend-only website in **Next.js (latest stable)** using **Tailwind CSS**.
-
-The site is for a nonprofit social club named **Aarambha**.  
-It must be **simple, clean, professional**, and **highly configurable**.
+Here is a clean, sharp, and highly specific prompt designed to produce a human-crafted, high-end production feel without generic "AI slop" patterns (like overuse of rounded cards, repetitive glassmorphism, vague hero copy, or artificial section dividers):
 
 ---
 
-## 🎨 THEME CONFIGURATION
+**Prompt:**
 
-Make all colors and fonts configurable from **one central place**.
+Act as a lead frontend architect and UI/UX designer specialized in high-trust, editorial-grade non-profit platforms.
 
-1. In the project root, create:
-   - `theme.config.js`
-   - This file should export a single config object with:
-     • Primary Color
-     • Secondary Color
-     • Accent Color
-     • Background Color
-     • Text Color
-     • Font Families
+You are fixing and redesigning the website for **Aarambha**, a youth-led non-profit organization in Nepal focused on grassroots community development, education, and social empowerment.
 
-Example structure:
-```
+### CRITICAL REQUIREMENTS:
 
-module.exports = {
-colors: {
-primary: "#0F172A",
-secondary: "#0D9488",
-accent: "#D97706",
-background: "#FAFAFA",
-text: "#1F2937",
-},
-fonts: {
-heading: "Montserrat, sans-serif",
-body: "Open Sans, sans-serif",
-},
-};
+1. **NO AI SLOP OR GENERIC PATTERNS**:
+* Avoid generic, cliché layouts (e.g., repeating identical floating rounded cards everywhere, glassmorphism blur traps, or meaningless decorative icons).
+* Avoid filler text and vague claims. Write clear, grounded, real-world narrative copy tailored specifically to an NGO working in Nepal.
+* Do NOT use smooth gradient fades or soft grey blur overlays between sections. All section transitions must be sharp, deliberate, and structural.
 
-```
 
-2. Tailwind must be configured to use these values via `tailwind.config.js` references to `theme.config.js`.
+2. **COLOR SYSTEM & SURFACE ARCHITECTURE**:
+Strictly enforce this palette and structured surface rule—do not mix random white and dark blocks:
+* `primary`: `#0F172A` (Deep Slate Navy)
+* `secondary`: `#0D9488` (Himalayan Teal)
+* `accent`: `#D97706` (Warm Ochre / Gold)
+* `background`: `#F8FAFC` (Soft Off-White Base — avoid pure `#FFFFFF` page background)
+* `surface`: `#FFFFFF` (Card & Focused Section Background)
+* `muted`: `#F1F5F9` (Alternate Section Background)
+* `text`: `#1E293B` (High Contrast Slate Text)
+* `textLight`: `#64748B` (Subtle Secondary Text)
+* `border`: `#E2E8F0` (Structural Dividers)
+* `heroDark`: `#0B1324` (Rich Solid Dark Hero Base)
 
-Do not hardcode colors or fonts anywhere else.
 
----
+3. **SECTION RHYTHM & FLOW**:
+Alternate background levels systematically to create natural visual weight and rhythm:
+* **Hero Section**: `bg-heroDark` (Solid, dark, confident, with sharp bottom boundary)
+* **Mission & Core Focus**: `bg-surface` (Clean, structured reading experience)
+* **Key Programs**: `bg-muted` (Card grid with subtle borders, high contrast)
+* **Impact Metrics**: `bg-surface` (Grounded numbers with clear typographic hierarchy)
+* **Community Stories / Field Updates**: `bg-muted` (Editorial style content layout)
+* **Call-to-Action (Donate / Join)**: `bg-primary` or `bg-accent` (Solid, high-intent block)
+* **Footer**: `bg-heroDark` or `bg-primary` (Clean, functional)
 
-## 🧰 PROJECT REQUIREMENTS
 
-• Use **Next.js**  
-• Use **Tailwind CSS** only  
-• No backend / no database  
-• Static placeholder content inside components
+4. **TYPOGRAPHY & CONTENT HIERARCHY**:
+* Use bold, high-contrast headings with tight leading (`tracking-tight`).
+* Ensure strict WCAG AAA contrast compliance: high-contrast dark text (`#1E293B`) on light backgrounds, crisp white text on dark sections.
+* Use strict 1-line code comments only when necessary (`// comment`). Do not use multi-line comments (`/* ... */`).
 
----
 
-## 🧱 COMPONENT & PAGE STRUCTURE
+5. **CARDS & COMPONENTS**:
+* Standard cards: `bg-surface border border-border rounded-lg p-6 shadow-sm`
+* Hover interactions: Subdued and tactile (`hover:border-slate-400 hover:shadow-md transition-all duration-200`)
+* Buttons: Sharp, solid background buttons with crisp focus states.
 
-### Global Layout
-- `Header` with navigation
-- `Footer` with social icons
 
-Navigation:
-Home | About | Programs | Team | Contact
 
----
-
-### Pages
-
-#### 1. **Home**
-- Hero section
-  • Title: “Aarambha”
-  • Tagline: “Where Change Begins”
-  • Primary Call-to-Action button
-- Brief description
-- Featured Programs preview
-
-#### 2. **About**
-- Full club description
-- Mission / vision
-
-#### 3. **Programs**
-- A list/grid of programs
-- Icons, titles, description
-
-#### 4. **Team**
-- Team member cards
-  • Photo (placeholder)
-  • Name
-  • Title
-  • Short bio
-
-#### 5. **Contact**
-- Contact form UI only (no submission logic)
-- Contact details
-  • Email, phone, address
-
----
-
-## 🧩 COMPONENT GUIDELINES
-
-Create reusable components:
-- Button
-- Card
-- Hero
-- Section Title
-- Navbar
-- Footer
-
-All Tailwind classes must use theme tokens.
-
-Example:
-```
-
-bg-primary text-background
-hover:bg-accent
-font-heading
-
-```
-
----
-
-## 📐 TYPGRAPHY & FONTS
-
-Use Google Fonts:
-• Headings: Montserrat
-• Body: Open Sans
-
-Load these in the app `_document.js` or via app/head.
-
-Configure Tailwind to use:
-```
-
-font-heading
-font-body
-
-```
-
-defined via `theme.config.js`.
-
----
-
-## 🎨 RESPONSIVENESS
-
-Every page must be fully responsive (mobile + tablet + desktop).
-
----
-
-## 🧼 CLEAN CODE GUIDELINES
-
-• Use TypeScript  
-• Well structured folders:
-  /components
-  /layouts
-  /pages (or app/*)
-  /styles
-  theme.config.js
-  tailwind.config.js
-• Add comments where needed
-• No inline Tailwind colors — always reference centralized theme
-
----
-
-## 📦 FINAL EXPECTATION
-
-Output a **complete Next.js project** with:
-
-✔ Tailwind CSS theme configured  
-✔ Central color + font config  
-✔ Clean component-based UI  
-✔ Ready to run:
-```
-
-npm install
-npm run dev
-
-```
-
-Make the UI minimal and professional following NGO website aesthetic.
-```
-
----
+Produce the full, clean, standalone code implementing this exact architecture.
